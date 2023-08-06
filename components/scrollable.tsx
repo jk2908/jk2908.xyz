@@ -35,18 +35,20 @@ export default function Scrollable({ children }: { children: React.ReactNode }) 
   }
 
   useEffect(() => {
-    if (!wrapperRef.current) {
+    const wrapper = wrapperRef.current
+
+    if (!wrapper) {
       return
     }
 
-    resizeRef.current = new ResizeObserver(() => handleScroll(wrapperRef.current))
-    resizeRef.current.observe(wrapperRef.current)
+    resizeRef.current = new ResizeObserver(() => handleScroll(wrapper))
+    resizeRef.current.observe(wrapper)
 
-    handleScroll(wrapperRef.current)
+    handleScroll(wrapper)
 
     return () => {
-      if (wrapperRef.current && resizeRef.current) {
-        resizeRef.current.unobserve(wrapperRef.current)
+      if (wrapper && resizeRef.current) {
+        resizeRef.current.unobserve(wrapper)
       }
     }
   }, [])

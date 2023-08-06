@@ -24,7 +24,7 @@ export default async function Page() {
           <a className="link" href="https://www.github.com/jk2908">
             Github
           </a>{' '}
-          or I've written a few things.
+          or I&apos;ve written a few things.
         </p>
       </Spacer>
 
