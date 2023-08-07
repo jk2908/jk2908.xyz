@@ -31,7 +31,7 @@ export default function Scrollable({ children }: { children: React.ReactNode }) 
     const { scrollLeft, scrollWidth, clientWidth } = target
 
     setIsLeftEdgeVisible(scrollLeft > 0)
-    setIsRightEdgeVisible(scrollLeft < scrollWidth - clientWidth)
+    setIsRightEdgeVisible(Math.ceil(scrollLeft) < scrollWidth - clientWidth)
   }
 
   useEffect(() => {
