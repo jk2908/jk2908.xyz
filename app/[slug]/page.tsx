@@ -21,7 +21,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <Wrapper>
-      <Heading level={1} className="text-sm mb-2">{title}</Heading>
+      <Heading level={1} className="mb-2 text-sm">
+        {title}
+      </Heading>
       <div className="prose" dangerouslySetInnerHTML={{ __html: body.html }}></div>
     </Wrapper>
   )

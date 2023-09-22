@@ -29,19 +29,25 @@ export default async function Page() {
       </Spacer>
 
       <Spacer>
-        <Heading level={2} className="mb-2 text-sm">Writing</Heading>
+        <Heading level={2} className="mb-2 text-sm">
+          Writing
+        </Heading>
 
-        {allPosts.length
-          ? allPosts.map(({ title, url }) => (
-              <div key={url}>
-                <Link href={url}>{title}</Link>
-              </div>
-            ))
-          : <>My bad, I haven&apos;t written anything yet.</>}
+        {allPosts.length ? (
+          allPosts.map(({ title, url }) => (
+            <div key={url}>
+              <Link href={url}>{title}</Link>
+            </div>
+          ))
+        ) : (
+          <>My bad, I haven&apos;t written anything yet.</>
+        )}
       </Spacer>
 
       <Spacer>
-        <Heading level={2} className="mb-2 text-sm">Contact</Heading>
+        <Heading level={2} className="mb-2 text-sm">
+          Contact
+        </Heading>
         <p>
           Connect via email{' '}
           <a className="link" href="mailto:jeromekenway@gmail.com">

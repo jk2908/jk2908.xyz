@@ -20,8 +20,8 @@ export default function Scrollable({ children }: { children: React.ReactNode }) 
   const wrapperRef = useRef<HTMLDivElement>(null)
   const resizeRef = useRef<ResizeObserver>()
 
-  const [isLeftEdgeVisible, setIsLeftEdgeVisible] = useState(false)
-  const [isRightEdgeVisible, setIsRightEdgeVisible] = useState(false)
+  const [leftEdgeVisible, setLeftEdgeVisible] = useState(false)
+  const [rightEdgeVisible, setRightEdgeVisible] = useState(false)
 
   function handleScroll(target: HTMLElement | null) {
     if (!target) {
@@ -30,8 +30,8 @@ export default function Scrollable({ children }: { children: React.ReactNode }) 
 
     const { scrollLeft, scrollWidth, clientWidth } = target
 
-    setIsLeftEdgeVisible(scrollLeft > 0)
-    setIsRightEdgeVisible(Math.ceil(scrollLeft) < scrollWidth - clientWidth)
+    setLeftEdgeVisible(scrollLeft > 0)
+    setRightEdgeVisible(Math.ceil(scrollLeft) < scrollWidth - clientWidth)
   }
 
   useEffect(() => {
@@ -55,14 +55,14 @@ export default function Scrollable({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="relative overflow-auto">
-      <GradientMask visible={isLeftEdgeVisible} />
+      <GradientMask visible={leftEdgeVisible} />
       <div
         ref={wrapperRef}
         onScroll={e => handleScroll(e.currentTarget)}
         className="hide-scrollbar flex overflow-auto whitespace-nowrap">
         {children}
       </div>
-      <GradientMask visible={isRightEdgeVisible} flipped />
+      <GradientMask visible={rightEdgeVisible} flipped />
     </div>
   )
 }

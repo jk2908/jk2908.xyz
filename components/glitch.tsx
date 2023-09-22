@@ -10,7 +10,12 @@ type Props<T extends React.ElementType> = {
 
 const Glitch = forwardRef(
   <T extends React.ElementType>(
-    { children, as, className, ...props }: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>,
+    {
+      children,
+      as,
+      className,
+      ...props
+    }: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>,
     ref: React.ForwardedRef<HTMLElement>
   ) => {
     const Component = as || 'span'
