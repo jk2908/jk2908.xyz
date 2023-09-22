@@ -58,21 +58,6 @@ module.exports = {
             color: colors.neutral[300],
           },
         },
-        /*
-        scroll: {
-          '0%': {
-            transform: 'translateX(0%)'
-          },
-          '25%' {
-            transform: 'translateX(0%)'
-          },
-          '50%': {
-            transform: 'translateX(calc(var(--x) * -1))'
-          },
-          '75%': {
-            transform: 'translateX(calc(var(--x) * -1))'
-          },
-        }*/
         scroll: {
           from: {
             transform: 'translateX(0)',
