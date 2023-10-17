@@ -12,11 +12,11 @@ export default function Heading({
   className,
   ...rest
 }: Props & React.HTMLAttributes<HTMLHeadingElement>) {
-  const Component = `h${level}` as const
+  const Cmp = `h${level}` as const
 
   return (
-    <Component className={cn('text-neutral-400', className)} {...rest}>
+    <Cmp className={cn('text-neutral-400', className)} {...rest}>
       {children}
-    </Component>
+    </Cmp>
   )
 }

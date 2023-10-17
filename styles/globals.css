@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --nuk3: 0 255 0;
-    --app-bg: theme(colors.neutral.900);
+    --app-bg: theme(colors.neutral.950);
   }
 }
 
