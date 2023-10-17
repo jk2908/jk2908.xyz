@@ -14,16 +14,16 @@ const Glitch = forwardRef(
       children,
       as,
       className,
-      ...props
+      ...rest
     }: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>,
     ref: React.ForwardedRef<HTMLElement>
   ) => {
-    const Component = as || 'span'
+    const Cmp = as || 'span'
 
     return (
-      <Component ref={ref} className={cn('motion-safe:animate-glitch', className)} {...props}>
+      <Cmp ref={ref} className={cn('motion-safe:animate-glitch', className)} {...rest}>
         {children}
-      </Component>
+      </Cmp>
     )
   }
 )
