@@ -23,32 +23,30 @@ export default function Scrollable({ children }: { children: React.ReactNode }) 
   const [leftEdgeVisible, setLeftEdgeVisible] = useState(false)
   const [rightEdgeVisible, setRightEdgeVisible] = useState(false)
 
-  function handleScroll(target: HTMLElement | null) {
-    if (!target) {
-      return
-    }
+  function handleScroll() {
+    const node = wrapperRef.current
 
-    const { scrollLeft, scrollWidth, clientWidth } = target
+    if (!node) return
+
+    const { scrollLeft, scrollWidth, clientWidth } = node
 
     setLeftEdgeVisible(scrollLeft > 0)
     setRightEdgeVisible(Math.ceil(scrollLeft) < scrollWidth - clientWidth)
   }
 
   useEffect(() => {
-    const wrapper = wrapperRef.current
+    const node = wrapperRef.current
 
-    if (!wrapper) {
-      return
-    }
+    if (!node) return
 
-    resizeRef.current = new ResizeObserver(() => handleScroll(wrapper))
-    resizeRef.current.observe(wrapper)
+    resizeRef.current = new ResizeObserver(handleScroll)
+    resizeRef.current.observe(node)
 
-    handleScroll(wrapper)
+    handleScroll()
 
     return () => {
-      if (wrapper && resizeRef.current) {
-        resizeRef.current.unobserve(wrapper)
+      if (node && resizeRef.current) {
+        resizeRef.current.unobserve(node)
       }
     }
   }, [])
@@ -58,7 +56,7 @@ export default function Scrollable({ children }: { children: React.ReactNode }) 
       <GradientMask visible={leftEdgeVisible} />
       <div
         ref={wrapperRef}
-        onScroll={e => handleScroll(e.currentTarget)}
+        onScroll={handleScroll}
         className="hide-scrollbar flex overflow-auto whitespace-nowrap">
         {children}
       </div>
