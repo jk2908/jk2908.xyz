@@ -11,10 +11,10 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'md': '720px',
+        md: '720px',
       },
       colors: {
-        'nuk3': 'rgb(var(--nuk3) / <alpha-value>)',
+        nuk3: 'rgb(var(--nuk3) / <alpha-value>)',
         'app-bg': 'var(--app-bg)',
       },
       fontFamily: {
@@ -63,9 +63,9 @@ module.exports = {
             transform: 'translateX(0)',
           },
           to: {
-            transform: `translateX(calc(-100% - ${spacing[8]}))`
-          }
-        }
+            transform: `translateX(calc(-100% - ${spacing[8]}))`,
+          },
+        },
       },
       animation: {
         glitch: 'glitch 7000ms infinite linear alternate',
