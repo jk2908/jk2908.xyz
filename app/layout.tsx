@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { IBM_Plex_Mono } from 'next/font/google'
 import localFont from 'next/font/local'
 
 import { DESCRIPTION, ME } from '@/lib/config'
@@ -8,11 +9,11 @@ import Header from '@/components/header'
 
 import '@/styles/globals.css'
 
-const mono = localFont({
-  src: '../public/assets/Minor-Praxis-IngramMono-Regular.woff2',
+const mono = IBM_Plex_Mono({
   variable: '--font-mono',
-  weight: '400',
+  weight: ['400', '500', '600'],
   style: 'normal',
+  subsets: ['latin'],
 })
 
 export const metadata: Metadata = {
@@ -69,7 +70,7 @@ export const runtime = 'edge'
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr" className={cn('h-full font-mono', mono.variable)}>
-      <body className="flex min-h-full flex-col bg-app-bg text-neutral-100 selection:bg-nuk3 selection:text-app-bg">
+      <body className="flex min-h-full flex-col bg-app-bg tracking-wider text-neutral-100 selection:bg-nuk3 selection:text-app-bg">
         <Header />
         <main className="grow py-8 sm:py-12">{children}</main>
         <Footer />
