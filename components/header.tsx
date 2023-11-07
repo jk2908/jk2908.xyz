@@ -1,15 +1,15 @@
 import Link from 'next/link'
 
-import { SITE } from '@/lib/config'
-import Wrapper from '@/components/wrapper'
+import { URL } from '@/lib/config'
 import Glitch from '@/components/glitch'
+import Wrapper from '@/components/wrapper'
 
 export default function Header() {
   return (
     <Wrapper>
       <header className="flex flex-wrap items-center justify-between gap-x-12 gap-y-2 py-8 sm:py-12">
-        <Glitch as={Link} href="/">
-          {SITE}
+        <Glitch as={Link} className="text-sm" href="/">
+          {URL}
         </Glitch>
       </header>
     </Wrapper>
