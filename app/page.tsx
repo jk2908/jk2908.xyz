@@ -20,7 +20,7 @@ export default async function Page() {
         </Heading>
 
         <p>
-          Jerome Kenway is a UI designer x front-end engineer from London. Checkout my code on{' '}
+          Jerome Kenway is a UI designer &amp; front-end engineer from London. Checkout my code on{' '}
           <a className="link" href="https://www.github.com/jk2908">
             Github
           </a>{' '}
@@ -29,7 +29,7 @@ export default async function Page() {
       </Spacer>
 
       <Spacer>
-        <Heading level={2} className="mb-2 text-sm">
+        <Heading level={2} className="mb-1 text-sm">
           Writing
         </Heading>
 
@@ -45,7 +45,7 @@ export default async function Page() {
       </Spacer>
 
       <Spacer>
-        <Heading level={2} className="mb-2 text-sm">
+        <Heading level={2} className="mb-1 text-sm">
           Contact
         </Heading>
         <p>
