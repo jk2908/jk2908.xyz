@@ -1,8 +1,8 @@
-const { fontFamily, spacing } = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
+import type { Config } from 'tailwindcss'
+import colors from 'tailwindcss/colors'
+import { fontFamily, spacing } from 'tailwindcss/defaultTheme'
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -71,7 +71,13 @@ module.exports = {
         glitch: 'glitch 7000ms infinite linear alternate',
         scroll: 'scroll 20000ms linear infinite reverse',
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [],
 }
+
+export default config
