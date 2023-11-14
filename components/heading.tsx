@@ -6,7 +6,7 @@ type Props = {
   className?: string
 }
 
-export default function Heading({
+export function Heading({
   children,
   level,
   className,

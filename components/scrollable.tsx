@@ -16,7 +16,7 @@ function GradientMask({ visible, flipped }: { visible?: boolean; flipped?: boole
   )
 }
 
-export default function Scrollable({ children }: { children: React.ReactNode }) {
+export function Scrollable({ children }: { children: React.ReactNode }) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const resizeRef = useRef<ResizeObserver>()
 

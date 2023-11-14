@@ -70,7 +70,7 @@ export const runtime = 'edge'
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr" className={cn('h-full font-mono', mono.variable)}>
-      <body className="flex min-h-full flex-col bg-app-bg tracking-wider text-neutral-100 selection:bg-nuk3 selection:text-app-bg">
+      <body className="flex min-h-full flex-col bg-app-bg tracking-wider text-neutral-100 selection:bg-gr33n selection:text-app-bg">
         <Header />
         <main className="grow py-8 sm:py-12">{children}</main>
         <Footer />

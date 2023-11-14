@@ -8,7 +8,7 @@ type Props<T extends React.ElementType> = {
   className?: string
 }
 
-const Glitch = forwardRef(
+export const Glitch = forwardRef(
   <T extends React.ElementType>(
     {
       children,
@@ -29,5 +29,3 @@ const Glitch = forwardRef(
 )
 
 Glitch.displayName = 'Glitch'
-
-export default Glitch

@@ -1,6 +1,6 @@
 import type { NowPlaying, SpotifyResponse } from '@/lib/types'
-import Heading from '@/components/heading'
-import Scrollable from '@/components/scrollable'
+import { Heading } from '@/components/heading'
+import { Scrollable } from '@/components/scrollable'
 
 async function getAccessToken() {
   const res = await fetch('https://accounts.spotify.com/api/token', {
@@ -58,11 +58,11 @@ async function getNowPlaying(): Promise<NowPlaying> {
   }
 }
 
-export default async function NowPlaying() {
+export async function NowPlaying() {
   const { live, track } = await getNowPlaying()
 
   const prefix = (
-    <Heading level={3} className="text-nuk3" aria-label="Currently playing on Spotify">
+    <Heading level={3} className="text-gr33n" aria-label="Currently playing on Spotify">
       s
     </Heading>
   )

@@ -1,7 +1,7 @@
-import NowPlaying from '@/components/now-playing'
-import Wrapper from '@/components/wrapper'
+import { NowPlaying } from '@/components/now-playing'
+import { Wrapper } from '@/components/wrapper'
 
-export default function Footer() {
+export function Footer() {
   const year = new Date().getFullYear()
 
   return (
