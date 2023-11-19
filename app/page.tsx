@@ -3,9 +3,10 @@ import Link from 'next/link'
 import { allPosts } from 'contentlayer/generated'
 
 import { ME } from '@/lib/config'
-import Heading from '@/components/heading'
-import Spacer from '@/components/spacer'
-import Wrapper from '@/components/wrapper'
+
+import { Heading } from '@/components/heading'
+import { Spacer } from '@/components/spacer'
+import { Wrapper } from '@/components/wrapper'
 
 export const metadata: Metadata = {
   title: 'Home - ' + ME,

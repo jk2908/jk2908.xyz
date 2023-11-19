@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { URL } from '@/lib/config'
+
 import { Glitch } from '@/components/glitch'
 import { Wrapper } from '@/components/wrapper'
 

@@ -1,8 +1,9 @@
 import { allPosts } from 'contentlayer/generated'
 
 import { getPost } from '@/lib/utils'
-import Heading from '@/components/heading'
-import Wrapper from '@/components/wrapper'
+
+import { Heading } from '@/components/heading'
+import { Wrapper } from '@/components/wrapper'
 
 export async function generateStaticParams() {
   return allPosts.map(({ _raw }) => {

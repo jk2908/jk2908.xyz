@@ -1,4 +1,5 @@
 import type { NowPlaying, SpotifyResponse } from '@/lib/types'
+
 import { Heading } from '@/components/heading'
 import { Scrollable } from '@/components/scrollable'
 

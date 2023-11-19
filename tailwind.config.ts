@@ -19,7 +19,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
-        mono: ['var(--font-mono)', ...fontFamily.mono],
+        mono: ['var(--font-geist-mono)', ...fontFamily.mono],
       },
       keyframes: {
         glitch: {
