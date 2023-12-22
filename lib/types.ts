@@ -32,8 +32,6 @@ export type NowPlaying = {
 export type Post = {
   title: string
   slug: string
-  date: string
-  content: string
-  excerpt: string
-  coverImage: string
+  publishedAt: string
+  body: string
 }

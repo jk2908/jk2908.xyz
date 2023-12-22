@@ -25,9 +25,7 @@ async function getNowPlaying(): Promise<NowPlaying> {
   try {
     const { access_token } = await getAccessToken()
 
-    if (!access_token) {
-      return offAir
-    }
+    if (!access_token) return offAir
 
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
       method: 'GET',
