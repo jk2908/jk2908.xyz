@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { allPosts } from 'contentlayer/generated'
 
 import { ME } from '@/lib/config'
+import { allPosts } from '@/lib/mdx'
 
 import { Heading } from '@/components/heading'
 import { Spacer } from '@/components/spacer'
@@ -34,14 +34,16 @@ export default async function Page() {
           Writing
         </Heading>
 
-        {allPosts.length ? (
-          allPosts.map(({ title, url }) => (
-            <div key={url}>
-              <Link href={url}>{title}</Link>
-            </div>
-          ))
+        {!allPosts.length ? (
+          "My bad, I haven't written anything yet."
         ) : (
-          <>My bad, I haven&apos;t written anything yet.</>
+          <ol className="flex flex-col">
+            {allPosts.map(({ title, slug }) => (
+              <Link href={`/${slug}`} key={slug}>
+                {title}
+              </Link>
+            ))}
+          </ol>
         )}
       </Spacer>
 
@@ -49,6 +51,7 @@ export default async function Page() {
         <Heading level={2} className="mb-1 text-sm">
           Contact
         </Heading>
+
         <p>
           Connect via email{' '}
           <a className="link" href="mailto:jeromekenway@gmail.com">

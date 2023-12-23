@@ -1,3 +1,5 @@
+import { unstable_noStore as noStore } from 'next/cache'
+
 import type { NowPlaying, SpotifyResponse } from '@/lib/types'
 
 import { Heading } from '@/components/heading'
@@ -22,12 +24,12 @@ async function getAccessToken() {
 const offAir = { live: false, track: null } satisfies NowPlaying
 
 async function getNowPlaying(): Promise<NowPlaying> {
+  noStore()
+
   try {
     const { access_token } = await getAccessToken()
 
-    if (!access_token) {
-      return offAir
-    }
+    if (!access_token) return offAir
 
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
       method: 'GET',
@@ -55,7 +57,7 @@ async function getNowPlaying(): Promise<NowPlaying> {
       },
     }
   } catch (err) {
-    return offAir
+    throw err
   }
 }
 

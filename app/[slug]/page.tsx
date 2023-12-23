@@ -1,13 +1,12 @@
-import { allPosts } from 'contentlayer/generated'
-
-import { getPost } from '@/lib/utils'
+import { allPosts, getPost } from '@/lib/mdx'
 
 import { Heading } from '@/components/heading'
 import { Wrapper } from '@/components/wrapper'
+import { Mdx } from '@/components/mdx'
 
 export async function generateStaticParams() {
-  return allPosts.map(({ _raw }) => {
-    slug: _raw.flattenedPath
+  return allPosts.map(({ slug }) => {
+    slug
   })
 }
 
@@ -25,7 +24,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <Heading level={1} className="mb-2 text-sm">
         {title}
       </Heading>
-      <div className="prose" dangerouslySetInnerHTML={{ __html: body.html }}></div>
+      
+      <Mdx source={body} />
     </Wrapper>
   )
 }

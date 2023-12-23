@@ -1,21 +1,9 @@
-import { cache } from 'react'
 import { clsx, type ClassValue } from 'clsx'
-import { allPosts, type Post } from 'contentlayer/generated'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-
-export const getPost: (slug: string) => Promise<Post> = cache(async slug => {
-  const post = allPosts.find(({ _raw }) => _raw.flattenedPath === slug)
-
-  if (!post) {
-    throw new Error(`No post found for ${slug}`)
-  }
-
-  return post
-})
 
 export function wait(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))

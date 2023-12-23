@@ -8,29 +8,17 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "pnpm": {
-    "overrides": {
-      "@opentelemetry/api": "1.4.1",
-      "@opentelemetry/core": "1.13.0",
-      "@opentelemetry/exporter-trace-otlp-grpc": "0.39.1",
-      "@opentelemetry/resources": "1.13.0",
-      "@opentelemetry/sdk-trace-base": "1.13.0",
-      "@opentelemetry/sdk-trace-node": "1.13.0",
-      "@opentelemetry/semantic-conventions": "1.13.0"
-    }
-  },
   "dependencies": {
     "@types/node": "20.8.9",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
     "autoprefixer": "10.4.16",
-    "contentlayer": "^0.3.4",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
     "framer-motion": "^10.16.4",
     "geist": "^1.1.0",
-    "next": "14.0.0",
-    "next-contentlayer": "^0.3.4",
+    "next": "14.0.5-canary.18",
+    "next-mdx-remote": "^4.4.1",
     "postcss": "8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
