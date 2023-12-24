@@ -5,7 +5,16 @@
 @layer base {
   :root {
     --gr33n: 0 255 0;
-    --app-bg: theme(colors.neutral.950);
+
+    --app-bg: theme(colors.white);
+    --app-text: theme(colors.neutral.950);
+    --keyline: theme(colors.neutral.200);
+
+    &[data-theme=dark] {
+      --app-bg: theme(colors.neutral.950);
+      --app-text: theme(colors.neutral.100);
+      --keyline: theme(colors.neutral.800);
+    }
   }
 }
 

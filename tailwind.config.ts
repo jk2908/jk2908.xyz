@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         gr33n: 'rgb(var(--gr33n) / <alpha-value>)',
         'app-bg': 'var(--app-bg)',
+        'app-text': 'var(--app-text)',
       },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
@@ -55,7 +56,7 @@ const config: Config = {
           },
           '1%, 5%, 7%, 12%, 15%, 21%': {
             'clip-path': 'none',
-            color: colors.neutral[300],
+            color: 'var(--app-text)',
           },
         },
         scroll: {
@@ -77,6 +78,7 @@ const config: Config = {
       },
     },
   },
+  darkMode: ['class', ],
   plugins: [],
 }
 

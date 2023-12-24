@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Mono } from 'next/font/google'
-import localFont from 'next/font/local'
 import { GeistMono } from 'geist/font/mono'
 
 import { DESCRIPTION, ME } from '@/lib/config'
@@ -8,6 +6,7 @@ import { cn } from '@/lib/utils'
 
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
+import { Provider } from '@/components/provider'
 
 import '@/styles/globals.css'
 
@@ -62,11 +61,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" dir="ltr" className={cn('h-full font-mono', GeistMono.variable)}>
-      <body className="flex min-h-full flex-col bg-app-bg tracking-wide text-neutral-100 selection:bg-gr33n selection:text-app-bg">
-        <Header />
-        <main className="grow py-8 sm:py-12">{children}</main>
-        <Footer />
+    <html
+      lang="en"
+      dir="ltr"
+      className={cn('h-full font-mono', GeistMono.variable)}
+      suppressHydrationWarning>
+      <body className="flex min-h-full flex-col bg-app-bg tracking-wide text-app-text selection:bg-gr33n">
+        <Provider>
+          <Header />
+          <main className="grow py-8 sm:py-12">{children}</main>
+          <Footer />
+        </Provider>
       </body>
     </html>
   )
