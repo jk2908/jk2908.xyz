@@ -13,6 +13,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
+  if (!allPosts.length) return []
+  
   const { title } = await getPost(params.slug)
 
   return { title }
