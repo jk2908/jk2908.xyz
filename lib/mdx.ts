@@ -41,12 +41,6 @@ function createPosts(dir: string) {
   try {
     const files = getMdxFiles(dir)
 
-    if (!files.length) {
-      console.warn('No posts found')
-
-      return []
-    }
-
     return files.map(file => {
       const { metadata, body } = readMdxFile(path.join(dir, file))
       const { title, publishedAt } = metadata
@@ -68,7 +62,7 @@ function createPosts(dir: string) {
       } satisfies Post
     })
   } catch (err) {
-    console.error(err)
+    console.warn(err)
 
     return []
   }
