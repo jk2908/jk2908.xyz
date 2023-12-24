@@ -38,40 +38,44 @@ function readMdxFile(file: string) {
 }
 
 function createPosts(dir: string) {
-  const files = getMdxFiles(dir)
+  try {
+    const files = getMdxFiles(dir)
 
-  if (!files.length) {
-    console.warn('No posts found')
+    if (!files.length) {
+      console.warn('No posts found')
+
+      return []
+    }
+
+    return files.map(file => {
+      const { metadata, body } = readMdxFile(path.join(dir, file))
+      const { title, publishedAt } = metadata
+      const slug = path.basename(file, path.extname(file))
+
+      if (!title) {
+        throw new Error('Post must have a title')
+      }
+
+      if (!publishedAt) {
+        throw new Error('Post must have a publishedAt date')
+      }
+
+      return {
+        slug,
+        title,
+        publishedAt,
+        body,
+      } satisfies Post
+    })
+  } catch (err) {
+    console.error(err)
 
     return []
   }
-
-  return files.map(file => {
-    const { metadata, body } = readMdxFile(path.join(dir, file))
-    const { title, publishedAt } = metadata
-    const slug = path.basename(file, path.extname(file))
-
-    if (!title) {
-      throw new Error('Post must have a title')
-    }
-
-    if (!publishedAt) {
-      throw new Error('Post must have a publishedAt date')
-    }
-
-    return {
-      slug,
-      title,
-      publishedAt,
-      body,
-    } satisfies Post
-  })
 }
 
 const getPosts = cache(async () => {
-  const posts = createPosts(path.join(process.cwd(), 'posts'))
-
-  return posts.length ? posts : []
+  return createPosts(path.join(process.cwd(), 'posts'))
 })
 
 export const allPosts = await getPosts()
