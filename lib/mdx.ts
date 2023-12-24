@@ -40,7 +40,9 @@ function readMdxFile(file: string) {
 function createPosts(dir: string) {
   try {
     if (!fs.existsSync(dir)) {
-      console.warn(`The ${dir} directory does not exist`)
+      console.warn(
+        `The ${dir} directory does not exist or if deploying, could be empty`
+      )
 
       return []
     }
