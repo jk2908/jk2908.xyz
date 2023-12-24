@@ -5,6 +5,8 @@ import { Wrapper } from '@/components/wrapper'
 import { Mdx } from '@/components/mdx'
 
 export async function generateStaticParams() {
+  if (!allPosts.length) return
+
   return allPosts.map(({ slug }) => {
     slug
   })
