@@ -35,3 +35,5 @@ export type Post = {
   publishedAt: string
   body: string
 }
+
+export type Theme = 'light' | 'dark' | undefined
