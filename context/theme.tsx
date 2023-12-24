@@ -30,8 +30,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     function handler({ matches }: MediaQueryListEvent) {
       setTheme(matches ? 'dark' : 'light')
-
-      console.log('Handler invoked', matches)
     }
 
     mq.addEventListener('change', handler)
