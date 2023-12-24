@@ -69,7 +69,9 @@ function createPosts(dir: string) {
 }
 
 const getPosts = cache(async () => {
-  return createPosts(path.join(process.cwd(), 'posts'))
+  const posts = createPosts(path.join(process.cwd(), 'posts'))
+
+  return posts.length ? posts : []
 })
 
 export const allPosts = await getPosts()
