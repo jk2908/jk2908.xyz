@@ -17,6 +17,7 @@ const config: Config = {
         gr33n: 'rgb(var(--gr33n) / <alpha-value>)',
         'app-bg': 'var(--app-bg)',
         'app-text': 'var(--app-text)',
+        'keyline': 'var(--keyline)',
       },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
