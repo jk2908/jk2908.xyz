@@ -39,7 +39,19 @@ function readMdxFile(file: string) {
 
 function createPosts(dir: string) {
   try {
+    if (!fs.existsSync(dir)) {
+      console.warn(`The ${dir} directory does not exist`)
+
+      return []
+    }
+
     const files = getMdxFiles(dir)
+
+    if (!files.length) {
+      console.warn(`No posts found in ${dir}`)
+
+      return []
+    }
 
     return files.map(file => {
       const { metadata, body } = readMdxFile(path.join(dir, file))
@@ -62,7 +74,7 @@ function createPosts(dir: string) {
       } satisfies Post
     })
   } catch (err) {
-    console.warn(err)
+    console.error(err)
 
     return []
   }
