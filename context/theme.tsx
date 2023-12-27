@@ -37,7 +37,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return () => {
       mq.removeEventListener('change', handler)
     }
-  })
+  }, [])
 
   return (
     <ThemeContext.Provider value={theme}>
