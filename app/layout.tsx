@@ -13,7 +13,7 @@ import '@/styles/globals.css'
 export const metadata: Metadata = {
   title: {
     default: ME,
-    template: '%s - ' + ME,
+    template: `%s - ${ME}`,
   },
   description: DESCRIPTION,
   icons: [
