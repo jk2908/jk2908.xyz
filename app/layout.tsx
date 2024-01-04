@@ -66,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       dir="ltr"
       className={cn('h-full font-mono', GeistMono.variable)}
       suppressHydrationWarning>
-      <body className="flex min-h-full flex-col bg-app-bg tracking-wide text-app-text selection:bg-gr33n">
+      <body className="flex min-h-full flex-col bg-app-bg tracking-wide text-app-fg selection:bg-gr33n">
         <Provider>
           <Header />
           <main className="grow py-8 sm:py-12">{children}</main>
