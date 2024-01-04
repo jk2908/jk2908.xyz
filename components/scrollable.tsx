@@ -20,8 +20,8 @@ export function Scrollable({ children }: { children: React.ReactNode }) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const resizeRef = useRef<ResizeObserver>()
 
-  const [leftEdgeVisible, setLeftEdgeVisible] = useState(false)
-  const [rightEdgeVisible, setRightEdgeVisible] = useState(false)
+  const [isLeftEdgeVisible, setLeftEdgeVisible] = useState(false)
+  const [isRightEdgeVisible, setRightEdgeVisible] = useState(false)
 
   function handleScroll() {
     const node = wrapperRef.current
@@ -53,14 +53,14 @@ export function Scrollable({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="relative overflow-auto">
-      <GradientMask visible={leftEdgeVisible} />
+      <GradientMask visible={isLeftEdgeVisible} />
       <div
         ref={wrapperRef}
         onScroll={handleScroll}
         className="hide-scrollbar flex overflow-auto whitespace-nowrap">
         {children}
       </div>
-      <GradientMask visible={rightEdgeVisible} flipped />
+      <GradientMask visible={isRightEdgeVisible} flipped />
     </div>
   )
 }
