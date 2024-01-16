@@ -1,8 +1,10 @@
+import million from 'million/compiler'
+
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
     ppr: true,
-  }
+  },
 }
 
-export default nextConfig
+export default million.next(nextConfig, { auto: { rsc: true } })
