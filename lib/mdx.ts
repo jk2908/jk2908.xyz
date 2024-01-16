@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import path from 'path'
 import { cache } from 'react'
 
@@ -9,7 +9,7 @@ type Metadata = {
   publishedAt: string
 }
 
-function parseFrontmatter(content: string) {
+function parse(content: string) {
   const regex = /^---\r?\n([\s\S]*?)\r?\n---([\s\S]*)$/
   const match = content.match(regex)
   const metadata: Partial<Metadata> = {}
@@ -29,25 +29,19 @@ function parseFrontmatter(content: string) {
   return { metadata, body }
 }
 
-function getMdxFiles(dir: string) {
-  return fs.readdirSync(dir).filter(file => path.extname(file) === '.mdx')
+async function getMdx(dir: string) {
+  const files = await fs.readdir(dir)
+
+  return files.filter(file => path.extname(file) === '.mdx')
 }
 
-function readMdxFile(file: string) {
-  return parseFrontmatter(fs.readFileSync(file, 'utf-8'))
+async function readMdx(file: string) {
+  return parse(await fs.readFile(file, 'utf-8'))
 }
 
-function createPosts(dir: string) {
+async function createPosts(dir: string) {
   try {
-    if (!fs.existsSync(dir)) {
-      console.warn(
-        `The ${dir} directory does not exist or if deploying, could be empty`
-      )
-
-      return []
-    }
-
-    const files = getMdxFiles(dir)
+    const files = await getMdx(dir)
 
     if (!files.length) {
       console.warn(`No posts found in ${dir}`)
@@ -55,26 +49,30 @@ function createPosts(dir: string) {
       return []
     }
 
-    return files.map(file => {
-      const { metadata, body } = readMdxFile(path.join(dir, file))
-      const { title, publishedAt } = metadata
-      const slug = path.basename(file, path.extname(file))
+    const posts = await Promise.all(
+      files.map(async file => {
+        const { metadata, body } = await readMdx(path.join(dir, file))
+        const { title, publishedAt } = metadata
+        const slug = path.basename(file, path.extname(file))
 
-      if (!title) {
-        throw new Error('Post must have a title')
-      }
+        if (!title) {
+          throw new Error('Post must have a title')
+        }
 
-      if (!publishedAt) {
-        throw new Error('Post must have a publishedAt date')
-      }
+        if (!publishedAt) {
+          throw new Error('Post must have a publishedAt date')
+        }
 
-      return {
-        slug,
-        title,
-        publishedAt,
-        body,
-      } satisfies Post
-    })
+        return {
+          slug,
+          title,
+          publishedAt,
+          body,
+        } satisfies Post
+      })
+    )
+
+    return posts
   } catch (err) {
     console.error(err)
 
@@ -82,9 +80,10 @@ function createPosts(dir: string) {
   }
 }
 
-const getPosts = cache(async () => {
-  return createPosts(path.join(process.cwd(), 'posts'))
-})
+export const allPosts = cache(async () => await createPosts(path.join(process.cwd(), 'posts')))
 
-export const allPosts = await getPosts()
-export const getPost = async (slug: string) => allPosts.find(post => post.slug === slug) as Post
+export async function onePost(slug: string) {
+  const posts = await allPosts()
+
+  return posts.find(post => post.slug === slug)
+}

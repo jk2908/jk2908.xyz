@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
+  const posts = await allPosts()
+
   return (
     <Wrapper>
       <Spacer>
@@ -38,7 +40,7 @@ export default async function Page() {
           "My bad, I haven't written anything yet."
         ) : (
           <ol className="flex flex-col">
-            {allPosts.map(({ title, slug }) => (
+            {posts.map(({ title, slug }) => (
               <Link href={`/${slug}`} key={slug}>
                 {title}
               </Link>
