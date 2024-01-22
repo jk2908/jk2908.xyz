@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { unstable_noStore as noStore } from 'next/cache'
 
 import type { NowPlaying, SpotifyResponse } from '@/lib/types'
@@ -21,11 +22,9 @@ async function getAccessToken() {
   return res.json()
 }
 
-const offAir = { live: false, track: null } satisfies NowPlaying
+const offAir = { track: null } satisfies NowPlaying
 
 async function getNowPlaying(): Promise<NowPlaying> {
-  noStore()
-
   try {
     const { access_token } = await getAccessToken()
 
@@ -43,17 +42,13 @@ async function getNowPlaying(): Promise<NowPlaying> {
     }
 
     const {
-      item: { name, artists, album, external_urls },
-    } = (await res.json()) as SpotifyResponse
+      item: { name, artists },
+    } = await res.json()
 
     return {
-      live: true,
       track: {
         name,
-        artist: artists.map(({ name }) => name).join(', '),
-        album: album.images[0].url,
-        image: album.images[0].url,
-        url: external_urls.spotify,
+        artist: artists.map(({ name }: { name: string }) => name).join(', '),
       },
     }
   } catch (err) {
@@ -61,9 +56,15 @@ async function getNowPlaying(): Promise<NowPlaying> {
   }
 }
 
-export async function NowPlaying() {
-  const { live, track } = await getNowPlaying()
+async function Track() {
+  noStore()
 
+  const { track } = await getNowPlaying()
+
+  return track ? `${track?.name} by ${track?.artist}` : 'Off air'
+}
+
+export async function NowPlaying() {
   const prefix = (
     <Heading level={3} className="text-gr33n" aria-label="Currently playing on Spotify">
       s
@@ -73,7 +74,12 @@ export async function NowPlaying() {
   return (
     <div className="flex items-baseline gap-2 overflow-x-hidden">
       {prefix}
-      <Scrollable>{live ? track?.name + ' by ' + track?.artist : 'Off air'}</Scrollable>
+
+      <Scrollable>
+        <Suspense fallback="...">
+          <Track />
+        </Suspense>
+      </Scrollable>
     </div>
   )
 }

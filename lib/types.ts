@@ -19,13 +19,12 @@ export type SpotifyResponse = {
 }
 
 export type NowPlaying = {
-  live: boolean
   track: {
     name: string
     artist: string
-    album: string
-    image: string
-    url: string
+    album?: string
+    image?: string
+    url?: string
   } | null
 }
 
