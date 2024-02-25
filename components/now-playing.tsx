@@ -43,12 +43,12 @@ async function getNowPlaying(): Promise<NowPlaying> {
 
     const {
       item: { name, artists },
-    } = await res.json()
+    } = (await res.json()) as SpotifyResponse
 
     return {
       track: {
         name,
-        artist: artists.map(({ name }: { name: string }) => name).join(', '),
+        artist: artists.map(({ name }) => name).join(', '),
       },
     }
   } catch (err) {
