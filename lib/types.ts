@@ -16,6 +16,7 @@ export type SpotifyResponse = {
       }[]
     }
   }
+  currently_playing_type: string
 }
 
 export type NowPlaying = {

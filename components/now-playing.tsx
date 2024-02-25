@@ -27,7 +27,6 @@ const offAir = { track: null } satisfies NowPlaying
 async function getNowPlaying(): Promise<NowPlaying> {
   try {
     const { access_token } = await getAccessToken()
-
     if (!access_token) return offAir
 
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
@@ -37,13 +36,11 @@ async function getNowPlaying(): Promise<NowPlaying> {
       },
     })
 
-    if (!res.ok || res.status === 204) {
-      return offAir
-    }
+    if (!res.ok || res.status === 204) return offAir
+    const { item } = (await res.json()) as SpotifyResponse
 
-    const {
-      item: { name, artists },
-    } = (await res.json()) as SpotifyResponse
+    if (!item) return offAir
+    const { name, artists } = item
 
     return {
       track: {
@@ -58,10 +55,9 @@ async function getNowPlaying(): Promise<NowPlaying> {
 
 async function Track() {
   noStore()
-
   const { track } = await getNowPlaying()
 
-  return track ? `${track?.name} by ${track?.artist}` : 'Off air'
+  return track ? `${track.name} by ${track.artist}` : 'Off air'
 }
 
 export async function NowPlaying() {
