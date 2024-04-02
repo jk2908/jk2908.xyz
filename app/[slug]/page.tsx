@@ -1,7 +1,10 @@
-import { allPosts, onePost } from '@/lib/mdx'
+import { redirect } from 'next/navigation'
+
+import { allPosts, onePost } from '@/lib/md'
 
 import { Heading } from '@/components/heading'
 import { Mdx } from '@/components/mdx'
+import { Spacer } from '@/components/spacer'
 import { Wrapper } from '@/components/wrapper'
 
 export async function generateStaticParams() {
@@ -12,7 +15,11 @@ export async function generateStaticParams() {
   })
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const post = await onePost(params.slug)
 
   if (!post) return
@@ -25,9 +32,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function Page({ params }: { params: { slug: string } }) {
   const post = await onePost(params.slug)
 
-  if (!post) return
+  if (!post) redirect('/')
 
-  const { title, body } = post
+  const { title, body, publishedAt } = post
 
   return (
     <Wrapper>
@@ -35,7 +42,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
         {title}
       </Heading>
 
-      <Mdx source={body} />
+      <Spacer>
+        <Mdx source={body} />
+      </Spacer>
+
+      <Spacer>
+        <time className="text-xs" dateTime={publishedAt}>
+          Published on {publishedAt}
+        </time>
+      </Spacer>
     </Wrapper>
   )
 }

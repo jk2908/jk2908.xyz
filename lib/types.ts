@@ -33,6 +33,9 @@ export type Post = {
   title: string
   slug: string
   publishedAt: string
+  updatedAt?: string
+  isPrivate?: boolean
+  isDraft?: boolean
   body: string
 }
 

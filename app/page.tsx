@@ -1,10 +1,10 @@
+import { Suspense } from 'react'
 import { Metadata } from 'next'
-import Link from 'next/link'
 
 import { ME } from '@/lib/config'
-import { allPosts } from '@/lib/mdx'
 
 import { Heading } from '@/components/heading'
+import { PostsList } from '@/components/posts-list'
 import { Spacer } from '@/components/spacer'
 import { Wrapper } from '@/components/wrapper'
 
@@ -13,8 +13,6 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const posts = await allPosts()
-
   return (
     <Wrapper>
       <Spacer>
@@ -23,7 +21,8 @@ export default async function Page() {
         </Heading>
 
         <p>
-          Jerome Kenway is a UI designer &amp; front-end engineer from London. Checkout my code on{' '}
+          Jerome Kenway is a UI designer &amp; front-end engineer from London.
+          Checkout my code on{' '}
           <a className="link" href="https://www.github.com/jk2908">
             Github
           </a>{' '}
@@ -36,17 +35,9 @@ export default async function Page() {
           Writing
         </Heading>
 
-        {!allPosts.length ? (
-          "My bad, I haven't written anything yet."
-        ) : (
-          <ol className="flex flex-col">
-            {posts.map(({ title, slug }) => (
-              <Link href={`/${slug}`} key={slug}>
-                {title}
-              </Link>
-            ))}
-          </ol>
-        )}
+        <Suspense fallback="...">
+          <PostsList />
+        </Suspense>
       </Spacer>
 
       <Spacer>

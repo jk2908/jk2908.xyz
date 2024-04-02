@@ -15,7 +15,7 @@ export function Heading({
   const Cmp = `h${level}` as const
 
   return (
-    <Cmp className={cn('text-neutral-400', className)} {...rest}>
+    <Cmp className={cn('text-neutral-500', className)} {...rest}>
       {children}
     </Cmp>
   )
