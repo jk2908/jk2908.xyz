@@ -4,7 +4,7 @@ publishedAt: 28 March 2024
 isPrivate: true
 ---
 
-Understandably CVs are meant to be succicnt, and I guess mine must have be satisfactorily so otherwise you wouldn't have been it this far. It can be frustrating though because I can't talk about everything I want to! This post contains a curated list of projects to check out further.
+Understandably CVs are meant to be succicnt, and I guess mine must have been satisfactorily so, otherwise you wouldn't have made it this far. This post serves as a curated list of projects to check out further.
 
 ## soundkey
 [soundkey](https://www.github.com/jk2908/soundkey) is an on-going project to explore RSCs, server actions and other *future* React features in Next 14. At the time of writing, some of the app's features and dependencies include:
