@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
-import { Provider } from '@/components/provider'
+import { Providers } from '@/components/providers'
 
 import '@/styles/globals.css'
 
@@ -67,11 +67,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={cn('h-full font-mono', GeistMono.variable)}
       suppressHydrationWarning>
       <body className="flex min-h-full flex-col bg-app-bg tracking-wider text-app-fg selection:bg-gr33n">
-        <Provider>
+        <Providers>
           <Header />
           <main className="grow py-8 sm:py-12">{children}</main>
           <Footer />
-        </Provider>
+        </Providers>
       </body>
     </html>
   )

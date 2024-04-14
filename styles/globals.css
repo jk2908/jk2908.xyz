@@ -6,7 +6,7 @@
   :root {
     --gr33n: 0 255 0;
 
-    --app-bg: theme(colors.white);
+    --app-bg: theme(colors.neutral.50);
     --app-fg: theme(colors.neutral.950);
     --keyline: theme(colors.neutral.200);
 
