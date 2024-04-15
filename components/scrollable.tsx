@@ -1,62 +1,124 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
-function GradientMask({ isVisible, mirror }: { isVisible?: boolean; mirror?: boolean }) {
+function GradientMask({
+  isVisible,
+  mirror,
+}: {
+  isVisible?: boolean
+  mirror?: boolean
+}) {
   return (
     <div
       className={cn(
         'to-app-bg/0 absolute z-10 w-6 from-app-bg opacity-0 transition-opacity duration-100',
-        mirror ? 'inset-[0_0_0_auto] bg-gradient-to-l' : 'inset-[0_auto_0_0] bg-gradient-to-r',
+        mirror
+          ? 'inset-[0_0_0_auto] bg-gradient-to-l'
+          : 'inset-[0_auto_0_0] bg-gradient-to-r',
         isVisible && 'opacity-100'
       )}
       aria-hidden="true"></div>
   )
 }
 
-export function Scrollable({ children }: { children: React.ReactNode }) {
+export function Scrollable({
+  children,
+  auto,
+  speed = 1500 / 60,
+  pause,
+}: {
+  children: React.ReactNode
+  auto?: boolean
+  speed?: number
+  pause?: number
+}) {
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const resizeRef = useRef<ResizeObserver>()
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const resizeRef = useRef<ResizeObserver | null>()
+  const vRef = useRef(0)
+  const dRef = useRef(1)
 
   const [isLeftEdgeVisible, setLeftEdgeVisible] = useState(false)
   const [isRightEdgeVisible, setRightEdgeVisible] = useState(false)
+  const [isPaused, setPaused] = useState<boolean | undefined>(undefined)
 
-  const handleScroll = useCallback(() => {
-    const node = wrapperRef.current
+  const onScroll = useCallback(() => {
+    const el = scrollRef.current
 
-    if (!node) return
+    if (!el) return
 
-    const { scrollLeft, scrollWidth, clientWidth } = node
+    const { scrollLeft, scrollWidth, clientWidth } = el
 
     setLeftEdgeVisible(scrollLeft > 0)
     setRightEdgeVisible(Math.ceil(scrollLeft) < scrollWidth - clientWidth)
   }, [])
 
   useEffect(() => {
-    const node = wrapperRef.current
+    const el = scrollRef.current
 
-    if (!node) return
+    if (!el) return
 
-    resizeRef.current = new ResizeObserver(handleScroll)
-    resizeRef.current.observe(node)
+    resizeRef.current = new ResizeObserver(onScroll)
+    resizeRef.current.observe(el)
 
-    handleScroll()
+    onScroll()
 
     return () => {
-      if (node && resizeRef.current) {
-        resizeRef.current.unobserve(node)
-      }
+      resizeRef.current?.unobserve(el)
+      resizeRef.current = null
     }
-  }, [handleScroll])
+  }, [onScroll])
+
+  useEffect(() => {
+    if (!auto) return
+
+    const interval = setInterval(() => {
+      const el = scrollRef.current
+      const v = vRef.current
+      const d = dRef.current
+
+      if (!el || isPaused) return
+
+      const { scrollWidth, clientWidth, scrollLeft } = el
+      const isStart = scrollLeft === 0
+      const isEnd = Math.ceil(scrollLeft + clientWidth) === scrollWidth
+
+      if (scrollWidth <= clientWidth) return
+
+      const move = () => {
+        el.scrollLeft = v
+        vRef.current = v + d
+        dRef.current = scrollLeft === 0 ? 1 : isEnd ? -1 : d
+      }
+
+      if (pause && !isPaused && (isStart || isEnd)) {
+        setPaused(true)
+
+        setTimeout(() => {
+          setPaused(false)
+          move()
+        }, pause)
+
+        return
+      } 
+
+      move()
+    }, speed)
+
+    return () => clearInterval(interval)
+  }, [auto, pause, isPaused, speed])
 
   return (
-    <div className="relative overflow-auto">
+    <div ref={wrapperRef} className="hide-scrollbar relative overflow-auto">
       <GradientMask isVisible={isLeftEdgeVisible} />
       <div
-        ref={wrapperRef}
-        onScroll={handleScroll}
+        ref={scrollRef}
+        onScroll={onScroll}
+        onPointerEnter={() => setPaused(true)}
+        onPointerLeave={() => setPaused(false)}
         className="hide-scrollbar flex overflow-auto whitespace-nowrap">
         {children}
       </div>
