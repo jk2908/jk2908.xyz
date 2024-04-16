@@ -1,6 +1,5 @@
 import fs from 'fs/promises'
 import path from 'path'
-import { cache } from 'react'
 
 import type { Post } from '@/lib/types'
 
@@ -76,9 +75,6 @@ async function createPosts(dir: string) {
   }
 }
 
-export const allPosts = cache(
-  async () => await createPosts(path.join(process.cwd(), 'posts'))
-)
-
+export const allPosts = await createPosts(path.join(process.cwd(), 'posts'))
 export const onePost = async (slug: string) =>
-  (await allPosts()).find(post => post.slug === slug)
+  allPosts.find(p => p.slug === slug)

@@ -7,13 +7,11 @@ import { Mdx } from '@/components/mdx'
 import { Spacer } from '@/components/spacer'
 import { Wrapper } from '@/components/wrapper'
 
-export async function generateStaticParams() {
-  const posts = await allPosts()
-
-  return posts.map(({ slug }) => {
+export const generateStaticParams = async () => (
+  allPosts.map(({ slug }) => {
     slug
   })
-}
+)
 
 export async function generateMetadata({
   params,
