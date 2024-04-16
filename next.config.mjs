@@ -1,8 +1,8 @@
-const nextConfig = {
+const config = {
   reactStrictMode: true,
   experimental: {
     ppr: true,
   }
 }
 
-export default nextConfig
+export default config
