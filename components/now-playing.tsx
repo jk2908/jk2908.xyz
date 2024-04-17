@@ -79,7 +79,7 @@ export async function NowPlaying({ className }: { className?: string }) {
       className={cn('flex items-baseline gap-2 overflow-x-hidden', className)}>
       {prefix}
 
-      <Scrollable auto speed={1850 / 60} pause={1000}>
+      <Scrollable auto speed={1850 / 60} wait={1000}>
         <Suspense fallback="...">
           <Track />
         </Suspense>

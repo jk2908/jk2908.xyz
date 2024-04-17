@@ -28,12 +28,12 @@ export function Scrollable({
   children,
   auto,
   speed = 1500 / 60,
-  pause,
+  wait,
 }: {
   children: React.ReactNode
   auto?: boolean
   speed?: number
-  pause?: number
+  wait?: number
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -43,7 +43,7 @@ export function Scrollable({
 
   const [isLeftEdgeVisible, setLeftEdgeVisible] = useState(false)
   const [isRightEdgeVisible, setRightEdgeVisible] = useState(false)
-  const [isPaused, setPaused] = useState<boolean | undefined>(undefined)
+  const [isPaused, setPaused] = useState<boolean>()
 
   const onScroll = useCallback(() => {
     const el = scrollRef.current
@@ -94,13 +94,13 @@ export function Scrollable({
         dRef.current = scrollLeft === 0 ? 1 : isEnd ? -1 : d
       }
 
-      if (pause && !isPaused && (isStart || isEnd)) {
+      if (wait && !isPaused && (isStart || isEnd)) {
         setPaused(true)
 
         setTimeout(() => {
           setPaused(false)
           move()
-        }, pause)
+        }, wait)
 
         return
       } 
@@ -109,7 +109,10 @@ export function Scrollable({
     }, speed)
 
     return () => clearInterval(interval)
-  }, [auto, pause, isPaused, speed])
+  }, [auto, wait, isPaused, speed])
+
+  const play = () => setPaused(false)
+  const pause = () => setPaused(true)
 
   return (
     <div ref={wrapperRef} className="hide-scrollbar relative overflow-auto">
@@ -117,8 +120,10 @@ export function Scrollable({
       <div
         ref={scrollRef}
         onScroll={onScroll}
-        onPointerEnter={() => setPaused(true)}
-        onPointerLeave={() => setPaused(false)}
+        onMouseEnter={pause}
+        onMouseLeave={play}
+        onTouchStart={pause}
+        onTouchEnd={play}
         className="hide-scrollbar flex overflow-auto whitespace-nowrap">
         {children}
       </div>
