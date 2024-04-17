@@ -103,7 +103,7 @@ export function Scrollable({
         }, wait)
 
         return
-      } 
+      }
 
       move()
     }, speed)
@@ -120,10 +120,10 @@ export function Scrollable({
       <div
         ref={scrollRef}
         onScroll={onScroll}
-        onMouseEnter={pause}
-        onMouseLeave={play}
-        onTouchStart={pause}
-        onTouchEnd={play}
+        onPointerEnter={pause}
+        onPointerLeave={play}
+        onPointerDown={pause}
+        onPointerOut={play}
         className="hide-scrollbar flex overflow-auto whitespace-nowrap">
         {children}
       </div>
