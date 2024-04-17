@@ -120,8 +120,8 @@ export function Scrollable({
       <div
         ref={scrollRef}
         onScroll={onScroll}
-        onPointerEnter={pause}
-        onPointerLeave={play}
+        onMouseEnter={pause}
+        onMouseLeave={play}
         onPointerDown={pause}
         onPointerOut={play}
         className="hide-scrollbar flex overflow-auto whitespace-nowrap">
