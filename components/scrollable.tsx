@@ -122,8 +122,6 @@ export function Scrollable({
         onScroll={onScroll}
         onMouseEnter={pause}
         onMouseLeave={play}
-        onPointerDown={pause}
-        onPointerOut={play}
         className="hide-scrollbar flex overflow-auto whitespace-nowrap">
         {children}
       </div>
