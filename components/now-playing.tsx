@@ -30,15 +30,12 @@ async function fromApi(): Promise<NowPlaying> {
     const { access_token } = await getToken()
     if (!access_token) return offAir
 
-    const res = await fetch(
-      'https://api.spotify.com/v1/me/player/currently-playing',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    )
+    const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    })
 
     if (!res.ok || res.status === 204) return offAir
     const { item } = (await res.json()) as SpotifyResponse
@@ -66,17 +63,13 @@ async function Track() {
 
 export async function NowPlaying({ className }: { className?: string }) {
   const prefix = (
-    <Heading
-      level={3}
-      className="text-gr33n"
-      aria-label="Currently playing on Spotify">
+    <Heading level={3} className="text-gr33n" aria-label="Currently playing on Spotify">
       s
     </Heading>
   )
 
   return (
-    <div
-      className={cn('flex items-baseline gap-2 overflow-x-hidden', className)}>
+    <div className={cn('flex items-baseline gap-2 overflow-x-hidden', className)}>
       {prefix}
 
       <Scrollable auto speed={1850 / 60} wait={1000}>
