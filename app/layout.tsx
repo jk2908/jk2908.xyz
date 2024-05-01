@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 import { GeistMono } from 'geist/font/mono'
 
-import { DESCRIPTION, ME } from '@/lib/config'
-import { cn } from '@/lib/utils'
+import { DESCRIPTION, ME } from '#/lib/config'
+import { cn } from '#/lib/utils'
 
-import { Footer } from '@/components/footer'
-import { Header } from '@/components/header'
-import { Providers } from '@/components/providers'
+import { Footer } from '#/components/footer'
+import { Header } from '#/components/header'
+import { Providers } from '#/components/providers'
 
-import '@/styles/globals.css'
+import '#/styles/globals.css'
 
 export const metadata: Metadata = {
   title: {

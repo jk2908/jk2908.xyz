@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-import type { Post } from '@/lib/types'
+import type { Post } from '#/lib/types'
 
 type Metadata = Omit<Post, 'slug' | 'body' | 'isPrivate' | 'isDraft'> & {
   isPrivate?: string

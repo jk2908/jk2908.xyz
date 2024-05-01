@@ -1,11 +1,11 @@
 import { Suspense } from 'react'
 import { unstable_noStore as noStore } from 'next/cache'
 
-import type { NowPlaying, SpotifyResponse } from '@/lib/types'
-import { cn } from '@/lib/utils'
+import type { NowPlaying, SpotifyResponse } from '#/lib/types'
+import { cn } from '#/lib/utils'
 
-import { Heading } from '@/components/heading'
-import { Scrollable } from '@/components/scrollable'
+import { Heading } from '#/components/heading'
+import { Scrollable } from '#/components/scrollable'
 
 async function getToken() {
   const res = await fetch('https://accounts.spotify.com/api/token', {

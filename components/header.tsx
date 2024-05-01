@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
-import { URL } from '@/lib/config'
+import { URL } from '#/lib/config'
 
-import { Glitch } from '@/components/glitch'
-import { Wrapper } from '@/components/wrapper'
+import { Glitch } from '#/components/glitch'
+import { Wrapper } from '#/components/wrapper'
 
 export function Header() {
   return (

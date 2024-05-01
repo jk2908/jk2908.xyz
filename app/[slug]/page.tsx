@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation'
 
-import { allPosts, onePost } from '@/lib/md'
+import { allPosts, onePost } from '#/lib/md'
 
-import { Heading } from '@/components/heading'
-import { Mdx } from '@/components/mdx'
-import { Spacer } from '@/components/spacer'
-import { Wrapper } from '@/components/wrapper'
+import { Heading } from '#/components/heading'
+import { Mdx } from '#/components/mdx'
+import { Spacer } from '#/components/spacer'
+import { Wrapper } from '#/components/wrapper'
 
 export const generateStaticParams = async () => (
   allPosts.map(({ slug }) => {

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { allPosts } from '@/lib/md'
+import { allPosts } from '#/lib/md'
 
 export async function PostsList() {
   const posts = allPosts.filter(p => !p.isPrivate)
