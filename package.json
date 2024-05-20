@@ -14,6 +14,7 @@
     "@types/react": "npm:types-react@beta",
     "@types/react-dom": "npm:types-react-dom@beta",
     "autoprefixer": "10.4.16",
+    "babel-plugin-react-compiler": "^0.0.0-experimental-592953e-20240517",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
     "geist": "^1.1.0",
