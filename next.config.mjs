@@ -2,6 +2,7 @@ const config = {
   reactStrictMode: true,
   experimental: {
     ppr: true,
+    reactCompiler: true
   },
   redirects: async () => [
     {
