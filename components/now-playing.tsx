@@ -43,6 +43,8 @@ async function fromApi(): Promise<NowPlaying> {
     if (!item) return offAir
     const { name, artists } = item
 
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+
     return {
       track: {
         name,
@@ -56,7 +58,7 @@ async function fromApi(): Promise<NowPlaying> {
 
 async function Track() {
   noStore()
-
+  
   const { track } = await fromApi()
   return track ? `${track.name} by ${track.artist}` : 'Off air'
 }
