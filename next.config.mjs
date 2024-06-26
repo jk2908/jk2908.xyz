@@ -2,7 +2,7 @@ const config = {
   reactStrictMode: true,
   experimental: {
     //ppr: 'incremental',
-    reactCompiler: true,
+    //reactCompiler: true,
   },
   redirects() {
     return [
