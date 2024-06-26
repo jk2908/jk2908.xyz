@@ -58,8 +58,8 @@ async function fromApi(): Promise<NowPlaying> {
 
 async function Track() {
   noStore()
+  
   const { track } = await fromApi()
-
   return track ? `${track.name} by ${track.artist}` : 'Off air'
 }
 

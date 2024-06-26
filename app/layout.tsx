@@ -10,6 +10,8 @@ import { Providers } from '#/components/providers'
 
 import '#/styles/globals.css'
 
+export const experimental_ppr = true
+
 export const metadata: Metadata = {
   title: {
     default: ME,
