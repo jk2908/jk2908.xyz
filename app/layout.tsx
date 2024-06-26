@@ -11,7 +11,6 @@ import { Providers } from '#/components/providers'
 import '#/styles/globals.css'
 
 //export const experimental_ppr = true
-export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: {
