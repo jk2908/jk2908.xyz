@@ -4,14 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "autoprefixer": "10.4.16",
-    "babel-plugin-react-compiler": "^0.0.0-experimental-592953e-20240517",
+    "babel-plugin-react-compiler": "^0.0.0-experimental-696af53-20240625",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
     "geist": "^1.1.0",
