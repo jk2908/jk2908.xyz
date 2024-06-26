@@ -1,7 +1,7 @@
 const config = {
   reactStrictMode: true,
   experimental: {
-    ppr: 'incremental',
+    ppr: true,
     reactCompiler: true,
   },
   redirects() {
