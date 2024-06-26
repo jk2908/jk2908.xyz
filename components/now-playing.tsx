@@ -25,7 +25,7 @@ async function getToken() {
 
 const offAir = { track: null } satisfies NowPlaying
 
-async function fromApi(): Promise<NowPlaying> {
+async function fromSpotifyApi(): Promise<NowPlaying> {
   try {
     const { access_token } = await getToken()
     if (!access_token) return offAir
@@ -50,14 +50,14 @@ async function fromApi(): Promise<NowPlaying> {
       },
     }
   } catch (err) {
-    throw err
+    return offAir
   }
 }
 
 async function Track() {
   noStore()
   
-  const { track } = await fromApi()
+  const { track } = await fromSpotifyApi()
   return track ? `${track.name} by ${track.artist}` : 'Off air'
 }
 

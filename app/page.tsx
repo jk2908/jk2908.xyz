@@ -7,6 +7,7 @@ import { Heading } from '#/components/heading'
 import { PostsList } from '#/components/posts-list'
 import { Spacer } from '#/components/spacer'
 import { Wrapper } from '#/components/wrapper'
+import { TestSuspense } from '#/components/test-suspense'
 
 export const metadata: Metadata = {
   title: `Home - ${ME}`,
@@ -19,6 +20,8 @@ export default async function Page() {
         <Heading level={1} className="sr-only">
           Home
         </Heading>
+
+        <TestSuspense />
 
         <p>
           Jerome Kenway is a UI designer &amp; front-end engineer from London.
