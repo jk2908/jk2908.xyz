@@ -50,7 +50,7 @@ async function fromApi(): Promise<NowPlaying> {
       },
     }
   } catch (err) {
-    return offAir
+    throw err
   }
 }
 
