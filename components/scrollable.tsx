@@ -1,23 +1,14 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-
 import { cn } from '#/lib/utils'
 
-function GradientMask({
-  isVisible,
-  mirror,
-}: {
-  isVisible?: boolean
-  mirror?: boolean
-}) {
+function GradientMask({ isVisible, mirror }: { isVisible?: boolean; mirror?: boolean }) {
   return (
     <div
       className={cn(
         'to-app-bg/0 absolute z-10 w-6 from-app-bg opacity-0 transition-opacity duration-100',
-        mirror
-          ? 'inset-[0_0_0_auto] bg-gradient-to-l'
-          : 'inset-[0_auto_0_0] bg-gradient-to-r',
+        mirror ? 'inset-[0_0_0_auto] bg-gradient-to-l' : 'inset-[0_auto_0_0] bg-gradient-to-r',
         isVisible && 'opacity-100'
       )}
       aria-hidden="true"></div>
@@ -26,14 +17,16 @@ function GradientMask({
 
 export function Scrollable({
   children,
-  auto,
+  mode = 'manual',
   speed = 1500 / 60,
   wait,
+  className,
 }: {
   children: React.ReactNode
-  auto?: boolean
+  mode?: 'auto' | 'manual'
   speed?: number
   wait?: number
+  className?: string
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -73,7 +66,7 @@ export function Scrollable({
   }, [onScroll])
 
   useEffect(() => {
-    if (!auto) return
+    if (mode !== 'auto') return
 
     const interval = setInterval(() => {
       const el = scrollRef.current
@@ -109,20 +102,20 @@ export function Scrollable({
     }, speed)
 
     return () => clearInterval(interval)
-  }, [auto, wait, isPaused, speed])
+  }, [mode, wait, isPaused, speed])
 
   const play = () => setPaused(false)
   const pause = () => setPaused(true)
 
   return (
-    <div ref={wrapperRef} className="hide-scrollbar relative overflow-auto">
+    <div ref={wrapperRef} className={cn('hide-scrollbar relative overflow-x-auto', className)}>
       <GradientMask isVisible={isLeftEdgeVisible} />
       <div
         ref={scrollRef}
         onScroll={onScroll}
         onMouseEnter={pause}
         onMouseLeave={play}
-        className="hide-scrollbar flex overflow-auto whitespace-nowrap">
+        className="hide-scrollbar flex overflow-x-auto whitespace-nowrap">
         {children}
       </div>
       <GradientMask isVisible={isRightEdgeVisible} mirror />
