@@ -43,8 +43,6 @@ async function fromApi(): Promise<NowPlaying> {
     if (!item) return offAir
     const { name, artists } = item
 
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-
     return {
       track: {
         name,
