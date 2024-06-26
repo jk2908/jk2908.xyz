@@ -9,7 +9,7 @@ import { Spacer } from '#/components/spacer'
 import { Wrapper } from '#/components/wrapper'
 
 export const metadata: Metadata = {
-  title: 'Home - ' + ME,
+  title: `Home - ${ME}`,
 }
 
 export default async function Page() {
