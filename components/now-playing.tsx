@@ -43,6 +43,8 @@ async function fromApi(): Promise<NowPlaying> {
     if (!item) return offAir
     const { name, artists } = item
 
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+
     return {
       track: {
         name,
@@ -50,7 +52,7 @@ async function fromApi(): Promise<NowPlaying> {
       },
     }
   } catch (err) {
-    throw err
+    return offAir
   }
 }
 
@@ -72,7 +74,7 @@ export async function NowPlaying({ className }: { className?: string }) {
     <div className={cn('flex items-baseline gap-2 overflow-x-hidden', className)}>
       {prefix}
 
-      <Scrollable auto speed={1850 / 60} wait={1000}>
+      <Scrollable mode="auto" speed={1850 / 60} wait={1000}>
         <Suspense fallback="...">
           <Track />
         </Suspense>
