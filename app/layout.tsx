@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
-import { GeistMono } from 'geist/font/mono'
 
 import { DESCRIPTION, ME } from '#/lib/config'
-import { cn } from '#/lib/utils'
 
 import { Footer } from '#/components/footer'
 import { Header } from '#/components/header'
+import { Move } from '#/components/move'
 import { Providers } from '#/components/providers'
 
 import '#/styles/globals.css'
@@ -66,13 +65,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       dir="ltr"
-      className={cn('h-full font-mono', GeistMono.variable)}
+      className="h-full overflow-x-hidden font-mono"
       suppressHydrationWarning>
       <body className="flex min-h-full flex-col bg-app-bg tracking-wider text-app-fg selection:bg-gr33n">
         <Providers>
-          <Header />
-          <main className="grow py-8 sm:py-12">{children}</main>
-          <Footer />
+          <Move>
+            <Header />
+          </Move>
+
+          <Move className="grow py-8 sm:py-12">
+            <main>{children}</main>
+          </Move>
+
+          <Move>
+            <Footer />
+          </Move>
         </Providers>
       </body>
     </html>

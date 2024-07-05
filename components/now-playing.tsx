@@ -6,8 +6,9 @@ import { cn } from '#/lib/utils'
 
 import { Heading } from '#/components/heading'
 import { Scrollable } from '#/components/scrollable'
+import { Loader } from '#/components/loader'
 
-async function getToken() {
+async function getSpotifyToken() {
   const res = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: {
@@ -27,7 +28,7 @@ const offAir = { track: null } satisfies NowPlaying
 
 async function fromSpotifyApi(): Promise<NowPlaying> {
   try {
-    const { access_token } = await getToken()
+    const { access_token } = await getSpotifyToken()
     if (!access_token) return offAir
 
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
@@ -56,8 +57,8 @@ async function fromSpotifyApi(): Promise<NowPlaying> {
 
 async function Track() {
   noStore()
-  
   const { track } = await fromSpotifyApi()
+
   return track ? `${track.name} by ${track.artist}` : 'Off air'
 }
 
@@ -73,7 +74,7 @@ export async function NowPlaying({ className }: { className?: string }) {
       {prefix}
 
       <Scrollable mode="auto" speed={1850 / 60} wait={1000}>
-        <Suspense fallback="...">
+        <Suspense fallback={<Loader />}>
           <Track />
         </Suspense>
       </Scrollable>

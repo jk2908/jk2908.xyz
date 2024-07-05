@@ -8,7 +8,7 @@ import { Wrapper } from '#/components/wrapper'
 export function Header() {
   return (
     <Wrapper>
-      <header className="flex flex-wrap items-center justify-between gap-x-12 gap-y-2 py-8 sm:py-12">
+      <header className="flex flex-col flex-wrap gap-x-12 gap-y-2 py-8 sm:py-12">
         <Glitch as={Link} className="text-sm" href="/">
           {URL}
         </Glitch>
