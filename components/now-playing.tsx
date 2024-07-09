@@ -38,8 +38,6 @@ async function fromSpotifyApi(): Promise<NowPlaying> {
       },
     })
 
-    await new Promise(res => setTimeout(res, 3000))
-
     if (!res.ok || res.status === 204) return offAir
     const { item } = (await res.json()) as SpotifyResponse
 
