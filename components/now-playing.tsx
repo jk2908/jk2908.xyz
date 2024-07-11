@@ -4,10 +4,10 @@ import { unstable_noStore as noStore } from 'next/cache'
 import type { NowPlaying, SpotifyResponse } from '#/lib/types'
 import { cn } from '#/lib/utils'
 
-import { Heading } from '#/components/heading'
-import { Scrollable } from '#/components/scrollable'
-import { Loader } from '#/components/loader'
 import { Glitch } from '#/components/glitch'
+import { Heading } from '#/components/heading'
+import { Loader } from '#/components/loader'
+import { Scrollable } from '#/components/scrollable'
 
 async function getSpotifyToken() {
   const res = await fetch('https://accounts.spotify.com/api/token', {
@@ -59,7 +59,7 @@ async function getSpotifyNowPlaying(): Promise<NowPlaying> {
 async function Track() {
   noStore()
   const { track } = await getSpotifyNowPlaying()
-  
+
   return track ? `${track.name} by ${track.artist}` : 'Off air'
 }
 
@@ -76,7 +76,9 @@ export async function NowPlaying({ className }: { className?: string }) {
 
       <Scrollable mode="auto" speed={1850 / 60} wait={1000}>
         <Suspense fallback={<Loader />}>
-          <Glitch><Track /></Glitch>
+          <Glitch>
+            <Track />
+          </Glitch>
         </Suspense>
       </Scrollable>
     </div>
