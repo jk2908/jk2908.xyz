@@ -7,6 +7,7 @@ import { cn } from '#/lib/utils'
 import { Heading } from '#/components/heading'
 import { Scrollable } from '#/components/scrollable'
 import { Loader } from '#/components/loader'
+import { Glitch } from '#/components/glitch'
 
 async function getSpotifyToken() {
   const res = await fetch('https://accounts.spotify.com/api/token', {
@@ -26,7 +27,7 @@ async function getSpotifyToken() {
 
 const offAir = { track: null } satisfies NowPlaying
 
-async function fromSpotifyApi(): Promise<NowPlaying> {
+async function getSpotifyNowPlaying(): Promise<NowPlaying> {
   try {
     const { access_token } = await getSpotifyToken()
     if (!access_token) return offAir
@@ -47,7 +48,7 @@ async function fromSpotifyApi(): Promise<NowPlaying> {
     return {
       track: {
         name,
-        artist: artists.map(({ name }) => name).join(', '),
+        artist: artists.map(a => a.name).join(', '),
       },
     }
   } catch (err) {
@@ -57,8 +58,8 @@ async function fromSpotifyApi(): Promise<NowPlaying> {
 
 async function Track() {
   noStore()
-  const { track } = await fromSpotifyApi()
-
+  const { track } = await getSpotifyNowPlaying()
+  
   return track ? `${track.name} by ${track.artist}` : 'Off air'
 }
 
@@ -75,7 +76,7 @@ export async function NowPlaying({ className }: { className?: string }) {
 
       <Scrollable mode="auto" speed={1850 / 60} wait={1000}>
         <Suspense fallback={<Loader />}>
-          <Track />
+          <Glitch><Track /></Glitch>
         </Suspense>
       </Scrollable>
     </div>

@@ -55,7 +55,7 @@ const config: Config = {
           },
           '1%, 5%, 7%, 12%, 15%, 21%': {
             'clip-path': 'none',
-            color: 'var(--app-text)',
+            color: 'var(--app-fg)',
           },
         },
         scroll: {
