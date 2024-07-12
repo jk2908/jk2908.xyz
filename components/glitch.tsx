@@ -1,31 +1,15 @@
-import { forwardRef } from 'react'
-
 import { cn } from '#/lib/utils'
 
-type Props<T extends React.ElementType> = {
+type Props = {
   children: React.ReactNode
-  as?: T
+  ref?: React.Ref<HTMLSpanElement>
   className?: string
+} & React.HTMLAttributes<HTMLSpanElement>
+
+export function Glitch({ children, ref, className, ...rest }: Props) {
+  return (
+    <span ref={ref} className={cn('motion-safe:animate-glitch', className)} {...rest}>
+      {children}
+    </span>
+  )
 }
-
-export const Glitch = forwardRef(
-  <T extends React.ElementType>(
-    {
-      children,
-      as,
-      className,
-      ...rest
-    }: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>,
-    ref: React.ForwardedRef<HTMLElement>
-  ) => {
-    const Cmp = as || 'span'
-
-    return (
-      <Cmp ref={ref} className={cn('motion-safe:animate-glitch', className)} {...rest}>
-        {children}
-      </Cmp>
-    )
-  }
-)
-
-Glitch.displayName = 'Glitch'

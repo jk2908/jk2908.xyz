@@ -9,7 +9,7 @@ import { Heading } from '#/components/heading'
 import { Loader } from '#/components/loader'
 import { Scrollable } from '#/components/scrollable'
 
-async function getSpotifyToken() {
+async function getToken() {
   const res = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: {
@@ -27,9 +27,9 @@ async function getSpotifyToken() {
 
 const offAir = { track: null } satisfies NowPlaying
 
-async function getSpotifyNowPlaying(): Promise<NowPlaying> {
+async function getNowPlaying(): Promise<NowPlaying> {
   try {
-    const { access_token } = await getSpotifyToken()
+    const { access_token } = await getToken()
     if (!access_token) return offAir
 
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
@@ -58,7 +58,7 @@ async function getSpotifyNowPlaying(): Promise<NowPlaying> {
 
 async function Track() {
   noStore()
-  const { track } = await getSpotifyNowPlaying()
+  const { track } = await getNowPlaying()
 
   return track ? `${track.name} by ${track.artist}` : 'Off air'
 }
