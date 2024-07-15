@@ -1,17 +1,23 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+
 import { cn } from '#/lib/utils'
 
-function GradientMask({ isVisible, mirror }: { isVisible?: boolean; mirror?: boolean }) {
+function GradientMask({
+  isVisible,
+  toMirrored,
+  ...rest
+}: { isVisible?: boolean; toMirrored?: boolean } & React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
         'to-app-bg/0 absolute z-10 w-6 from-app-bg opacity-0 transition-opacity duration-100',
-        mirror ? 'inset-[0_0_0_auto] bg-gradient-to-l' : 'inset-[0_auto_0_0] bg-gradient-to-r',
+        toMirrored ? 'inset-[0_0_0_auto] bg-gradient-to-l' : 'inset-[0_auto_0_0] bg-gradient-to-r',
         isVisible && 'opacity-100'
       )}
-      aria-hidden="true"></div>
+      aria-hidden="true"
+      {...rest}></div>
   )
 }
 
@@ -21,13 +27,14 @@ export function Scrollable({
   speed = 1500 / 60,
   wait,
   className,
+  ...rest
 }: {
   children: React.ReactNode
   mode?: 'auto' | 'manual'
   speed?: number
   wait?: number
   className?: string
-}) {
+} & React.HTMLAttributes<HTMLDivElement>) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const resizeRef = useRef<ResizeObserver | null>()
@@ -108,7 +115,10 @@ export function Scrollable({
   const pause = () => setPaused(true)
 
   return (
-    <div ref={wrapperRef} className={cn('hide-scrollbar relative overflow-x-auto', className)}>
+    <div
+      ref={wrapperRef}
+      className={cn('hide-scrollbar relative overflow-x-auto', className)}
+      {...rest}>
       <GradientMask isVisible={isLeftEdgeVisible} />
       <div
         ref={scrollRef}
@@ -118,7 +128,7 @@ export function Scrollable({
         className="hide-scrollbar flex overflow-x-auto whitespace-nowrap">
         {children}
       </div>
-      <GradientMask isVisible={isRightEdgeVisible} mirror />
+      <GradientMask isVisible={isRightEdgeVisible} toMirrored />
     </div>
   )
 }

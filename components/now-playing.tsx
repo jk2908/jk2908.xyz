@@ -60,7 +60,7 @@ async function Track() {
   noStore()
   const { track } = await getNowPlaying()
 
-  return track ? `${track.name} by ${track.artist}` : 'Off air'
+  return track ? <Glitch>{track.name} by ${track.artist}</Glitch> : 'Off air'
 }
 
 export async function NowPlaying({ className }: { className?: string }) {
@@ -76,9 +76,7 @@ export async function NowPlaying({ className }: { className?: string }) {
 
       <Scrollable mode="auto" speed={1850 / 60} wait={1000}>
         <Suspense fallback={<Loader />}>
-          <Glitch>
             <Track />
-          </Glitch>
         </Suspense>
       </Scrollable>
     </div>
