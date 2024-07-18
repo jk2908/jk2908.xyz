@@ -6,6 +6,7 @@ import { Footer } from '#/components/footer'
 import { Header } from '#/components/header'
 import { Move } from '#/components/move'
 import { Providers } from '#/components/providers'
+import { Wrapper } from '#/components/wrapper'
 
 import '#/styles/globals.css'
 
@@ -69,17 +70,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning>
       <body className="flex min-h-full flex-col bg-app-bg tracking-wider text-app-fg selection:bg-gr33n">
         <Providers>
-          <Move>
-            <Header />
-          </Move>
+          <Wrapper>
+            <Move>
+              <Header />
+            </Move>
+          </Wrapper>
 
           <Move className="grow py-8 sm:py-12">
             <main>{children}</main>
           </Move>
 
-          <Move>
-            <Footer />
-          </Move>
+          <Wrapper>
+            <Move>
+              <Footer />
+            </Move>
+          </Wrapper>
         </Providers>
       </body>
     </html>

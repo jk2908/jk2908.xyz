@@ -1,4 +1,4 @@
-import { cn } from '#/lib/utils'
+import { useId } from 'react'
 
 type Props = {
   children: React.ReactNode
@@ -9,14 +9,24 @@ type Props = {
 export function Heading({
   children,
   level,
-  className,
   ...rest
 }: Props & React.HTMLAttributes<HTMLHeadingElement>) {
   const Cmp = `h${level}` as const
+  const id = useId()
 
   return (
-    <Cmp className={cn('text-neutral-500', className)} {...rest}>
+    <Cmp {...rest}>
       {children}
+
+      <style href={id} precedence="medium">
+        {`
+          @scope {
+            :scope {
+              color: rgb(var(--neutral-500) / 100%);
+            }
+          }
+        `}
+      </style>
     </Cmp>
   )
 }

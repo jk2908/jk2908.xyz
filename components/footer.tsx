@@ -1,16 +1,34 @@
 import { NowPlaying } from '#/components/now-playing'
-import { Wrapper } from '#/components/wrapper'
 
 export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <Wrapper>
-      <footer className="flex justify-between gap-x-8 overflow-hidden border-t border-keyline py-4 align-middle text-sm">
-        <p className="shrink-0">Copyright {year}</p>
+    <footer>
+      <p className="shrink-0">Copyright {year}</p>
 
-        <NowPlaying />
-      </footer>
-    </Wrapper>
+      <NowPlaying />
+
+      <style>
+        {`
+          @scope {
+            :scope {
+              align-items: center;
+              border-block-start: 1px solid rgb(var(--keyline));
+              display: flex;
+              font-size: 14px;
+              gap: var(--space-8x);
+              justify-content: space-between;
+              overflow: hidden;
+              padding-block: var(--space-4x);
+            }
+
+            > p {
+              flex-shrink: 0;
+            }
+          }
+        `}
+      </style>
+    </footer>
   )
 }

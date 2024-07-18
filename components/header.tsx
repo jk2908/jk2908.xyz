@@ -1,17 +1,36 @@
+import { useId } from 'react'
 import Link from 'next/link'
 
 import { URL } from '#/lib/config'
 
-import { Wrapper } from '#/components/wrapper'
-
 export function Header() {
+
   return (
-    <Wrapper>
-      <header className="flex flex-col flex-wrap gap-x-12 gap-y-2 py-8 sm:py-12">
-        <Link className="text-sm" href="/">
-          {URL}
-        </Link>
-      </header>
-    </Wrapper>
+    <header>
+      <Link href="/">{URL}</Link>
+
+      <style>
+        {`
+          @scope {
+            :scope {
+              align-items: center;
+              display: flex;
+              flex-wrap: wrap;
+              gap: var(--space-12x);
+              justify-content: space-between;
+              padding-block: var(--space-8x);
+
+              @media (width >= 720px) {
+                padding-block: var(--space-12x);
+              }
+            }
+
+            > a {
+              font-size: 14px;
+            }
+          }
+        `}
+      </style>
+    </header>
   )
 }

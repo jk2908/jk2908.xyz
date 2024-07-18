@@ -1,8 +1,7 @@
-import { Suspense } from 'react'
+import { Suspense, useId } from 'react'
 import { unstable_noStore as noStore } from 'next/cache'
 
 import type { NowPlaying, SpotifyResponse } from '#/lib/types'
-import { cn } from '#/lib/utils'
 
 import { Glitch } from '#/components/glitch'
 import { Heading } from '#/components/heading'
@@ -60,25 +59,44 @@ async function Track() {
   noStore()
   const { track } = await getNowPlaying()
 
-  return track ? <Glitch>{track.name} by ${track.artist}</Glitch> : 'Off air'
+  return track ? (
+    <Glitch>
+      {track.name} by ${track.artist}
+    </Glitch>
+  ) : (
+    'Off air'
+  )
 }
 
-export async function NowPlaying({ className }: { className?: string }) {
-  const prefix = (
-    <Heading level={3} className="text-gr33n" aria-label="Currently playing on Spotify">
-      s
-    </Heading>
-  )
-
+export async function NowPlaying(props: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('flex items-baseline gap-2 overflow-x-hidden', className)}>
-      {prefix}
+    <div {...props}>
+      <Heading level={3} aria-label="Currently playing on Spotify">
+        s
+      </Heading>
 
       <Scrollable mode="auto" speed={1850 / 60} wait={1000}>
         <Suspense fallback={<Loader />}>
-            <Track />
+          <Track />
         </Suspense>
       </Scrollable>
+
+      <style>
+        {`
+          @scope {
+            :scope {
+              align-items: center;
+              display: flex;
+              gap: var(--space-4x);
+              overflow: hidden;
+            }
+
+            > h3 {
+              color: rgb(var(--gr33n) / 100%);
+            }
+          }
+        `}
+      </style>
     </div>
   )
 }

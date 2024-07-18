@@ -2,8 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { cn } from '#/lib/utils'
-
 function GradientMask({
   isVisible,
   toMirrored,
@@ -11,13 +9,21 @@ function GradientMask({
 }: { isVisible?: boolean; toMirrored?: boolean } & React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn(
-        'to-app-bg/0 absolute z-10 w-6 from-app-bg opacity-0 transition-opacity duration-100',
-        toMirrored ? 'inset-[0_0_0_auto] bg-gradient-to-l' : 'inset-[0_auto_0_0] bg-gradient-to-r',
-        isVisible && 'opacity-100'
-      )}
       aria-hidden="true"
-      {...rest}></div>
+      {...rest}>
+      <style>
+        {`
+          @scope {
+            :scope {
+              background: linear-gradient(${toMirrored ? 'to-left' : 'to-right'}, var(--app-bg) 0%, transparent 100%);
+              opacity: ${isVisible ? 1 : 0};
+              transition: opacity 100ms;
+              z-index: 10;
+            }
+          }
+        `}
+      </style>
+    </div>
   )
 }
 
@@ -26,14 +32,12 @@ export function Scrollable({
   mode = 'manual',
   speed = 1500 / 60,
   wait,
-  className,
   ...rest
 }: {
   children: React.ReactNode
   mode?: 'auto' | 'manual'
   speed?: number
   wait?: number
-  className?: string
 } & React.HTMLAttributes<HTMLDivElement>) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -117,18 +121,37 @@ export function Scrollable({
   return (
     <div
       ref={wrapperRef}
-      className={cn('hide-scrollbar relative overflow-x-auto', className)}
       {...rest}>
       <GradientMask isVisible={isLeftEdgeVisible} />
+
       <div
         ref={scrollRef}
         onScroll={onScroll}
         onMouseEnter={pause}
-        onMouseLeave={play}
-        className="hide-scrollbar flex overflow-x-auto whitespace-nowrap">
+        onMouseLeave={play}>
         {children}
       </div>
+
       <GradientMask isVisible={isRightEdgeVisible} toMirrored />
+
+      <style>
+        {`
+          @scope {
+            :scope {
+              overflow-x: auto;
+              position: relative;
+              scrollbar-width: none;
+            }
+
+            > div {
+              display: flex;
+              overflow-x: auto;
+              scrollbar-width: none;
+              white-space: nowrap;
+            }
+          }
+        `}
+      </style>
     </div>
   )
 }
