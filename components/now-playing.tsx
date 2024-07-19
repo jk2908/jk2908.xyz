@@ -61,7 +61,7 @@ async function Track() {
 
   return track ? (
     <Glitch>
-      {track.name} by ${track.artist}
+      {track.name} by {track.artist}
     </Glitch>
   ) : (
     'Off air'
