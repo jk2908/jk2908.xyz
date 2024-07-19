@@ -87,12 +87,12 @@ export async function NowPlaying(props: React.HTMLAttributes<HTMLDivElement>) {
             :scope {
               align-items: center;
               display: flex;
-              gap: var(--space-4x);
+              gap: var(--space-2x);
               overflow: hidden;
             }
 
             > h3 {
-              color: rgb(var(--gr33n) / 100%);
+              color: rgb(var(--gr33n-100) / 100%);
             }
           }
         `}

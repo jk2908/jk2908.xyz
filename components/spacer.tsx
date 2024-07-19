@@ -9,11 +9,11 @@ export function Spacer({
   return (
     <div {...rest}>
       {children}
-      
-      <style href={id} precedence="medium">
+
+      <style>
         {`
           @scope {
-            & + & {
+            :scope + & {
               margin-block-start: var(--space-6x);
 
               @media (width >= 720px) {

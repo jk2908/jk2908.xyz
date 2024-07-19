@@ -8,9 +8,7 @@ function GradientMask({
   ...rest
 }: { isVisible?: boolean; toMirrored?: boolean } & React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div
-      aria-hidden="true"
-      {...rest}>
+    <div aria-hidden="true" {...rest}>
       <style>
         {`
           @scope {
@@ -119,16 +117,10 @@ export function Scrollable({
   const pause = () => setPaused(true)
 
   return (
-    <div
-      ref={wrapperRef}
-      {...rest}>
+    <div ref={wrapperRef} {...rest}>
       <GradientMask isVisible={isLeftEdgeVisible} />
 
-      <div
-        ref={scrollRef}
-        onScroll={onScroll}
-        onMouseEnter={pause}
-        onMouseLeave={play}>
+      <div ref={scrollRef} onScroll={onScroll} onMouseEnter={pause} onMouseLeave={play}>
         {children}
       </div>
 
