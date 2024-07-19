@@ -60,7 +60,7 @@ async function Track() {
   noStore()
   const { track } = await getNowPlaying()
 
-  return track ? <Glitch>{track.name} by ${track.artist}</Glitch> : 'Off air'
+  return track ? <Glitch>{track.name} by {track.artist}</Glitch> : 'Off air'
 }
 
 export async function NowPlaying({ className }: { className?: string }) {
