@@ -6,13 +6,13 @@
   :root {
     --gr33n: 0 255 0;
 
-    --app-bg: theme(colors.neutral.50);
+    --app-bg: theme(colors.white);
     --app-fg: theme(colors.neutral.950);
     --keyline: theme(colors.neutral.200);
 
     &[data-theme=dark] {
       --app-bg: theme(colors.neutral.950);
-      --app-fg: theme(colors.neutral.100);
+      --app-fg: theme(colors.white);
       --keyline: theme(colors.neutral.800);
     }
   }
