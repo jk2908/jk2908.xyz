@@ -1,26 +1,25 @@
-import { useId } from 'react'
+import { clsx } from 'clsx'
+import { id } from 'lib/utils'
+
+const e = id()
 
 export function Spacer({
   children,
+  className,
   ...rest
 }: { children: React.ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
-  const id = useId()
-
   return (
-    <div {...rest}>
+    <div className={clsx(e, className)} {...rest}>
       {children}
 
-      <style>
+      <style href={e} precedence="medium">
         {`
-          @scope {
-            :scope + & {
-              margin-block-start: var(--space-6x);
+          .${e} + .${e} {
+            margin-block-start: var(--space-6x);
 
-              @media (width >= 720px) {
-                margin-block-start: var(--space-8x);
-              }
+            @media (width >= 720px) {
+              margin-block-start: var(--space-8x);
             }
-          }
         `}
       </style>
     </div>

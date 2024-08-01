@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import { id } from 'lib/utils'
 
 type Props = {
   children: React.ReactNode
@@ -12,13 +12,12 @@ export function Heading({
   ...rest
 }: Props & React.HTMLAttributes<HTMLHeadingElement>) {
   const Cmp = `h${level}` as const
-  const id = useId()
 
   return (
     <Cmp {...rest}>
       {children}
 
-      <style href={id} precedence="medium">
+      <style>
         {`
           @scope {
             :scope {
