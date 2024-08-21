@@ -1,34 +1,37 @@
+import { clsx } from 'clsx'
+import { cxx, Style } from '@jk2908/cxx'
+
 import { NowPlaying } from '#/components/now-playing'
 
-export function Footer() {
-  const year = new Date().getFullYear()
+const [styles, css] = cxx`
+  .footer {
+    align-items: center;
+    border-block-start: 1px solid rgb(var(--keyline));
+    display: flex;
+    font-size: 14px;
+    gap: var(--space-8x);
+    justify-content: space-between;
+    overflow: hidden;
+    padding-block: var(--space-4x);
 
-  return (
-    <footer>
-      <p className="shrink-0">Copyright {year}</p>
+    > p {
+      flex-shrink: 0;
+    }
+  }
+`
 
-      <NowPlaying />
+export function Footer({ className, ...rest }: React.HTMLAttributes<HTMLElement>) {
+	const year = new Date().getFullYear()
 
-      <style>
-        {`
-          @scope {
-            :scope {
-              align-items: center;
-              border-block-start: 1px solid rgb(var(--keyline));
-              display: flex;
-              font-size: 14px;
-              gap: var(--space-8x);
-              justify-content: space-between;
-              overflow: hidden;
-              padding-block: var(--space-4x);
-            }
+	return (
+		<footer className={clsx(styles.footer, className)} {...rest}>
+			<p>Copyright {year}</p>
 
-            > p {
-              flex-shrink: 0;
-            }
-          }
-        `}
-      </style>
-    </footer>
-  )
+			<NowPlaying />
+
+			<Style>
+        {css}
+      </Style>
+		</footer>
+	)
 }

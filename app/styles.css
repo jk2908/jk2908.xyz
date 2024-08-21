@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer base, utils;
 
 @layer base {
   :root {
@@ -12,8 +10,8 @@
     --neutral-800: 38 38 38;
     --neutral-950: 10 10 10;
 
-    --space-1\/2: 2px;
-    --space: 4px;
+    --space-1\/2: calc(var(--space) / 2);
+    --space: .25rem;
     --space-2x: calc(var(--space) * 2);
     --space-3x: calc(var(--space) * 3);
     --space-4x: calc(var(--space) * 4);
@@ -37,6 +35,17 @@
 
     --keyline: var(--neutral-200);
 
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+
+    --wrapper-max: 60ch;
+    --wrapper-px: var(--space-5x);
+
+    --text-xs: .75rem;
+    --text-sm: .875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+
     &[data-theme=dark] {
       --app-bg: rgb(var(--neutral-950) / 100%);
       --app-fg: rgb(var(--neutral-50) / 100%);
@@ -44,9 +53,22 @@
       --keyline: var(--neutral-800);
     }
   }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-mono), monospace;
+  }
 }
 
-@layer utilities {
+@layer utils {
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -61,13 +83,6 @@
   }
 
   .link {
-    @apply underline decoration-from-font underline-offset-2 hover:no-underline;
-  }
-}
-
-
-@layer components {
-  .body-link {
     text-decoration: underline;
     text-underline-offset: .2em;
 
@@ -75,10 +90,10 @@
       &:hover {
         text-decoration: none;
       }
-    }
+    }  
   }
 
-  .body-list {
+  .list {
     list-style-position: inside;
     list-style-type: none;
 

@@ -1,5 +1,5 @@
-import fs from 'fs/promises'
-import path from 'path'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
 import type { Post } from '#/lib/types'
 
@@ -17,14 +17,15 @@ function parse(content: string) {
     throw new Error('Invalid frontmatter')
   }
 
-  let [, frontmatter, body] = match
+  const [, frontmatter, body] = match
 
-  frontmatter.split('\n').forEach(line => {
-    const [key, value] = line.split(': ').map(str => str.trim())
-
-    metadata[key as keyof Metadata] = value
-  })
-
+  if (frontmatter) {
+    for (const line of frontmatter.split('\n')) {
+      const [key, value] = line.split(': ').map(str => str.trim())
+      metadata[key as keyof Metadata] = value
+    }
+  }
+  
   return { metadata, body }
 }
 

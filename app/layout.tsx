@@ -8,7 +8,7 @@ import { Move } from '#/components/move'
 import { Providers } from '#/components/providers'
 import { Wrapper } from '#/components/wrapper'
 
-import '#/styles/globals.css'
+import '#/app/styles.css'
 
 export const experimental_ppr = true
 

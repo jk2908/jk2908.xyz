@@ -1,38 +1,41 @@
-import { useId } from 'react'
+import { clsx } from 'clsx'
+import { cxx, Style } from '@jk2908/cxx'
+
+const [styles, css] = cxx`
+	@keyframes pulse {
+		0%, 100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.3;
+		}
+	}
+
+	.loader > span {
+	  animation: pulse 1s infinite;
+    color: rgb(var(--neutral-500) / 100%);
+	}
+`
 
 export function Loader({
-  count = 3,
-  ...rest
+	count = 3,
+	className,
+	...rest
 }: {
-  count?: number
+	count?: number
 } & React.HTMLAttributes<HTMLDivElement>) {
-  const id = useId()
+	return (
+		<div className={clsx(styles.loader, className)} {...rest}>
+			{Array.from({ length: count }, (_, idx) => (
+				// biome-ignore lint/suspicious/noArrayIndexKey: nah, it's fine here
+				<span key={idx} style={{ animationDelay: `0.${idx * 2}s` }}>
+					.
+				</span>
+			))}
 
-  return (
-    <div {...rest}>
-      {Array.from({ length: count }, (_, idx) => (
-        <span key={idx} style={{ animationDelay: `0.${idx * 2}s` }}>.</span>
-      ))}
-
-      <style>
-        {`
-          @keyframes pulse {
-            0%, 100% {
-              opacity: 1;
-            }
-            50% {
-              opacity: 0.3;
-            }
-          }
-
-          @scope {
-            > span {
-              animation: pulse 1s infinite;
-              color: rgb(var(--neutral-500) / 100%);  
-            }
-          }
-        `}
-      </style>
-    </div>
-  )
+			<Style>
+				{css}
+			</Style>
+		</div>
+	)
 }

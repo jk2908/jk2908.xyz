@@ -2,148 +2,131 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-function GradientMask({
-  isVisible,
-  toMirrored,
-  ...rest
-}: { isVisible?: boolean; toMirrored?: boolean } & React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div aria-hidden="true" {...rest}>
-      <style>
-        {`
-          @scope {
-            :scope {
-              background: linear-gradient(${toMirrored ? 'to-left' : 'to-right'}, var(--app-bg) 0%, transparent 100%);
-              opacity: ${isVisible ? 1 : 0};
-              transition: opacity 100ms;
-              z-index: 10;
-            }
-          }
-        `}
-      </style>
-    </div>
-  )
-}
+import { clsx } from 'clsx'
+import { cxx, Style } from '@jk2908/cxx'
+
+import { GradientMask } from '#/components/gradient-mask'
+
+const [styles, css] = cxx`
+	.scrollable {
+		overflow-x: auto;
+		position: relative;
+		scrollbar-width: none;
+
+		> div {
+			display: flex;
+			overflow-x: auto;
+			scrollbar-width: none;
+			white-space: nowrap;
+		}
+	}
+`
 
 export function Scrollable({
-  children,
-  mode = 'manual',
-  speed = 1500 / 60,
-  wait,
-  ...rest
+	children,
+	mode = 'manual',
+	speed = 1500 / 60,
+	wait,
+  className,
+	...rest
 }: {
-  children: React.ReactNode
-  mode?: 'auto' | 'manual'
-  speed?: number
-  wait?: number
+	children: React.ReactNode
+	mode?: 'auto' | 'manual'
+	speed?: number
+	wait?: number
 } & React.HTMLAttributes<HTMLDivElement>) {
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const resizeRef = useRef<ResizeObserver | null>()
-  const vRef = useRef(0)
-  const dRef = useRef(1)
+	const wrapperRef = useRef<HTMLDivElement>(null)
+	const scrollRef = useRef<HTMLDivElement>(null)
+	const resizeRef = useRef<ResizeObserver | null>(null)
+	const vRef = useRef(0)
+	const dRef = useRef(1)
 
-  const [isLeftEdgeVisible, setLeftEdgeVisible] = useState(false)
-  const [isRightEdgeVisible, setRightEdgeVisible] = useState(false)
-  const [isPaused, setPaused] = useState<boolean>()
+	const [isLeftEdgeVisible, setLeftEdgeVisible] = useState(false)
+	const [isRightEdgeVisible, setRightEdgeVisible] = useState(false)
+	const [isPaused, setPaused] = useState<boolean>()
 
-  const onScroll = useCallback(() => {
-    const el = scrollRef.current
+	const onScroll = useCallback(() => {
+		const el = scrollRef.current
 
-    if (!el) return
+		if (!el) return
 
-    const { scrollLeft, scrollWidth, clientWidth } = el
+		const { scrollLeft, scrollWidth, clientWidth } = el
 
-    setLeftEdgeVisible(scrollLeft > 0)
-    setRightEdgeVisible(Math.ceil(scrollLeft) < scrollWidth - clientWidth)
-  }, [])
+		setLeftEdgeVisible(scrollLeft > 0)
+		setRightEdgeVisible(Math.ceil(scrollLeft) < scrollWidth - clientWidth)
+	}, [])
 
-  useEffect(() => {
-    const el = scrollRef.current
+	useEffect(() => {
+		const el = scrollRef.current
 
-    if (!el) return
+		if (!el) return
 
-    resizeRef.current = new ResizeObserver(onScroll)
-    resizeRef.current.observe(el)
+		resizeRef.current = new ResizeObserver(onScroll)
+		resizeRef.current.observe(el)
 
-    onScroll()
+		onScroll()
 
-    return () => {
-      resizeRef.current?.unobserve(el)
-      resizeRef.current = null
-    }
-  }, [onScroll])
+		return () => {
+			resizeRef.current?.unobserve(el)
+			resizeRef.current = null
+		}
+	}, [onScroll])
 
-  useEffect(() => {
-    if (mode !== 'auto') return
+	useEffect(() => {
+		if (mode !== 'auto') return
 
-    const interval = setInterval(() => {
-      const el = scrollRef.current
-      const v = vRef.current
-      const d = dRef.current
+		const interval = setInterval(() => {
+			const el = scrollRef.current
+			const v = vRef.current
+			const d = dRef.current
 
-      if (!el || isPaused) return
+			if (!el || isPaused) return
 
-      const { scrollWidth, clientWidth, scrollLeft } = el
-      const isStart = scrollLeft === 0
-      const isEnd = Math.ceil(scrollLeft + clientWidth) === scrollWidth
+			const { scrollWidth, clientWidth, scrollLeft } = el
+			const isStart = scrollLeft === 0
+			const isEnd = Math.ceil(scrollLeft + clientWidth) === scrollWidth
 
-      if (scrollWidth <= clientWidth) return
+			if (scrollWidth <= clientWidth) return
 
-      const move = () => {
-        el.scrollLeft = v
-        vRef.current = v + d
-        dRef.current = scrollLeft === 0 ? 1 : isEnd ? -1 : d
-      }
+			const move = () => {
+				el.scrollLeft = v
+				vRef.current = v + d
+				dRef.current = scrollLeft === 0 ? 1 : isEnd ? -1 : d
+			}
 
-      if (wait && !isPaused && (isStart || isEnd)) {
-        setPaused(true)
+			if (wait && !isPaused && (isStart || isEnd)) {
+				setPaused(true)
 
-        setTimeout(() => {
-          setPaused(false)
-          move()
-        }, wait)
+				setTimeout(() => {
+					setPaused(false)
+					move()
+				}, wait)
 
-        return
-      }
+				return
+			}
 
-      move()
-    }, speed)
+			move()
+		}, speed)
 
-    return () => clearInterval(interval)
-  }, [mode, wait, isPaused, speed])
+		return () => clearInterval(interval)
+	}, [mode, wait, isPaused, speed])
 
-  const play = () => setPaused(false)
-  const pause = () => setPaused(true)
+	const play = () => setPaused(false)
+	const pause = () => setPaused(true)
 
-  return (
-    <div ref={wrapperRef} {...rest}>
-      <GradientMask isVisible={isLeftEdgeVisible} />
+	return (
+		<div className={clsx(styles.scrollable, className)} ref={wrapperRef} {...rest}>
+			<GradientMask isVisible={isLeftEdgeVisible} />
 
-      <div ref={scrollRef} onScroll={onScroll} onMouseEnter={pause} onMouseLeave={play}>
-        {children}
-      </div>
+			<div ref={scrollRef} onScroll={onScroll} onMouseEnter={pause} onMouseLeave={play}>
+				{children}
+			</div>
 
-      <GradientMask isVisible={isRightEdgeVisible} toMirrored />
+			<GradientMask isVisible={isRightEdgeVisible} toMirrored />
 
-      <style>
-        {`
-          @scope {
-            :scope {
-              overflow-x: auto;
-              position: relative;
-              scrollbar-width: none;
-            }
-
-            > div {
-              display: flex;
-              overflow-x: auto;
-              scrollbar-width: none;
-              white-space: nowrap;
-            }
-          }
-        `}
-      </style>
-    </div>
-  )
+			<Style>
+				{css}
+			</Style>
+		</div>
+	)
 }

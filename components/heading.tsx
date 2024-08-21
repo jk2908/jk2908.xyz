@@ -1,4 +1,5 @@
-import { id } from 'lib/utils'
+import { clsx } from 'clsx'
+import { cxx, Style } from '@jk2908/cxx'
 
 type Props = {
   children: React.ReactNode
@@ -6,26 +7,27 @@ type Props = {
   className?: string
 }
 
+const [styles, css] = cxx`
+  .heading {
+    color: rgb(var(--neutral-500) / 100%);
+  }
+`
+
 export function Heading({
   children,
+  className,
   level,
   ...rest
 }: Props & React.HTMLAttributes<HTMLHeadingElement>) {
   const Cmp = `h${level}` as const
 
   return (
-    <Cmp {...rest}>
+    <Cmp className={clsx(styles.heading, className)} {...rest}>
       {children}
 
-      <style>
-        {`
-          @scope {
-            :scope {
-              color: rgb(var(--neutral-500) / 100%);
-            }
-          }
-        `}
-      </style>
+      <Style>
+        {css}
+      </Style>
     </Cmp>
   )
 }

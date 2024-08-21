@@ -7,48 +7,44 @@ import { Mdx } from '#/components/mdx'
 import { Spacer } from '#/components/spacer'
 import { Wrapper } from '#/components/wrapper'
 
-export const generateStaticParams = async () => (
-  allPosts.map(({ slug }) => {
-    slug
-  })
-)
+export const generateStaticParams = async () => {
+	return allPosts.map(({ slug }) => slug)
+}
 
 export async function generateMetadata({
-  params,
+	params,
 }: {
-  params: { slug: string }
+	params: { slug: string }
 }) {
-  const post = await onePost(params.slug)
+	const p = await onePost(params.slug)
 
-  if (!post) return
+	if (!p) return
 
-  const { title } = post
-
-  return { title }
+	return { title: p.title }
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const post = await onePost(params.slug)
+	const p = await onePost(params.slug)
 
-  if (!post) redirect('/')
+	if (!p) redirect('/')
 
-  const { title, body, publishedAt } = post
+	const { title, body, publishedAt } = p
 
-  return (
-    <Wrapper>
-      <Heading level={1} className="mb-2 text-sm">
-        {title}
-      </Heading>
+	return (
+		<Wrapper>
+			<Heading level={1} className="mb-2 text-sm">
+				{title}
+			</Heading>
 
-      <Spacer>
-        <Mdx source={body} />
-      </Spacer>
+			<Spacer>
+				<Mdx source={body} />
+			</Spacer>
 
-      <Spacer>
-        <time className="text-xs" dateTime={publishedAt}>
-          Published on {publishedAt}
-        </time>
-      </Spacer>
-    </Wrapper>
-  )
+			<Spacer>
+				<time className="text-xs" dateTime={publishedAt}>
+					Published at {publishedAt}
+				</time>
+			</Spacer>
+		</Wrapper>
+	)
 }

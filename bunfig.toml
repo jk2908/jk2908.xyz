@@ -1,0 +1,2 @@
+[install.scopes]
+"@jk2908" = { token = "$JK2908_NPM_SCOPED_TOKEN", url = "https://registry.npmjs.org", }
