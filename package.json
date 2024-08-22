@@ -22,8 +22,8 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@types/node": "20.8.9",
-    "@types/react": "npm:types-react@19.0.0-beta.2",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-beta.2",
+    "@types/react": "npm:types-react@beta",
+    "@types/react-dom": "npm:types-react-dom@beta",
     "@types/webpack": "^5.28.5",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
