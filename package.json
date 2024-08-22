@@ -26,8 +26,8 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@types/node": "20.8.9",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
+    "@types/react": "npm:types-react@19.0.0-rc.0",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.0",
     "@types/webpack": "^5.28.5",
     "clsx": "^2.1.1"
   }
