@@ -22,12 +22,16 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@types/node": "20.8.9",
-    "@types/react": "npm:types-react@beta",
-    "@types/react-dom": "npm:types-react-dom@beta",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
     "@types/webpack": "^5.28.5",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
     "postcss": "8.4.31",
     "typescript": "5.2.2"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
   }
 }
