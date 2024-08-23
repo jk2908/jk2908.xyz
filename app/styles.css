@@ -46,6 +46,11 @@
     --text-lg: 1.125rem;
     --text-xl: 1.25rem;
 
+    --tracking-tight: -.05em;
+    --tracking-wide: .05em;
+    --tracking-wider: .1em;
+    --tracking-widest: .2em;
+
     &[data-theme=dark] {
       --app-bg: rgb(var(--neutral-950) / 100%);
       --app-fg: rgb(var(--neutral-50) / 100%);
@@ -63,8 +68,16 @@
     padding: 0;
   }
 
+  html {
+    block-size: 100%;
+  }
+
   body {
+    display: flex;
+    flex-direction: column;
     font-family: var(--font-mono), monospace;
+    letter-spacing: var(--tracking-wide);
+    min-block-size: 100%;
   }
 }
 
@@ -102,5 +115,17 @@
         content: '+ ';
       }
     }
+  }
+
+  .sr-only {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 }

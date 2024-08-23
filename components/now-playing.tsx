@@ -70,7 +70,7 @@ async function Track() {
 }
 
 const [styles, css] = cxx`
-	.now_playing {
+	.nowplaying {
 		align-items: center;
 		display: flex;
 		gap: var(--space-2x);
@@ -84,11 +84,11 @@ const [styles, css] = cxx`
 
 export async function NowPlaying({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) {
 	return (
-		<div className={clsx(styles.now_playing, className)} {...rest}>
+		<div className={clsx(styles.nowplaying, className)} {...rest}>
 			<Heading
 				level={3}
 				aria-label="Currently playing on Spotify"
-				style={{ color: 'rgb(var(--gr33n-100) / 1)' }}
+				style={{ color: 'rgb(var(--gr33n-100) / 1)', marginBlockEnd: '0px' }}
 			>
 				s
 			</Heading>
@@ -99,9 +99,9 @@ export async function NowPlaying({ className, ...rest }: React.HTMLAttributes<HT
 				</Suspense>
 			</Scrollable>
 
-			<style>
+			<Style>
 				{css}
-			</style>
+			</Style>
 		</div>
 	)
 }

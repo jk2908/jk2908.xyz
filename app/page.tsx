@@ -30,7 +30,7 @@ export default async function Page() {
 			</Spacer>
 
 			<Spacer>
-				<Heading level={2} className="mb-1 text-sm">
+				<Heading level={2}>
 					Writing
 				</Heading>
 
@@ -40,7 +40,7 @@ export default async function Page() {
 			</Spacer>
 
 			<Spacer>
-				<Heading level={2} className="mb-1 text-sm">
+				<Heading level={2}>
 					Contact
 				</Heading>
 

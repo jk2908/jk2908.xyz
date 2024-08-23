@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
 	return (
 		<Wrapper>
-			<Heading level={1} className="mb-2 text-sm">
+			<Heading level={1}>
 				{title}
 			</Heading>
 
@@ -41,7 +41,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 			</Spacer>
 
 			<Spacer>
-				<time className="text-xs" dateTime={publishedAt}>
+				<time dateTime={publishedAt} style={{ fontSize: 'var(--text-xs)' }}>
 					Published at {publishedAt}
 				</time>
 			</Spacer>

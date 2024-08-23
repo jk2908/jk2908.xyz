@@ -66,9 +66,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       dir="ltr"
-      className="h-full overflow-x-hidden font-mono"
       suppressHydrationWarning>
-      <body className="flex min-h-full flex-col bg-app-bg tracking-wider text-app-fg selection:bg-gr33n">
+      <body>
         <Providers>
           <Wrapper>
             <Move>
@@ -76,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Move>
           </Wrapper>
 
-          <Move className="grow py-8 sm:py-12">
+          <Move style={{ flexGrow: 1, paddingBlock: 'var(--space-8x)' }}>
             <main>{children}</main>
           </Move>
 
