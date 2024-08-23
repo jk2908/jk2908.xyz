@@ -2,8 +2,6 @@
 
 import { useCallback, useReducer } from 'react'
 
-import { cn } from '#/lib/utils'
-
 type State = {
   isMoving: boolean
   startX: number
@@ -54,8 +52,8 @@ function reducer(state: State, { payload, type }: Action) {
 
 export function Move({
   children,
-  className,
   style,
+  ...rest
 }: { children: React.ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
   const [{ isMoving, translateX, translateY }, dispatch] = useReducer(reducer, initialState)
 
@@ -76,7 +74,6 @@ export function Move({
       onPointerDown={onPress}
       onPointerMove={onMove}
       onPointerUp={onRelease}
-      className={cn(className)}
       style={{
         cursor: 'move',
         transform: `translate(${translateX}px, ${translateY}px)`,
@@ -84,7 +81,8 @@ export function Move({
         userSelect: 'none',
         zIndex: isMoving ? 51 : 0,
         ...style,
-      }}>
+      }}
+      {...rest}>
       {children}
     </div>
   )

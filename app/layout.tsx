@@ -6,8 +6,9 @@ import { Footer } from '#/components/footer'
 import { Header } from '#/components/header'
 import { Move } from '#/components/move'
 import { Providers } from '#/components/providers'
+import { Wrapper } from '#/components/wrapper'
 
-import '#/styles/globals.css'
+import '#/app/styles.css'
 
 export const experimental_ppr = true
 
@@ -65,21 +66,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       dir="ltr"
-      className="h-full overflow-x-hidden font-mono"
       suppressHydrationWarning>
-      <body className="flex min-h-full flex-col bg-app-bg tracking-wider text-app-fg selection:bg-gr33n">
+      <body>
         <Providers>
-          <Move>
-            <Header />
-          </Move>
+          <Wrapper>
+            <Move>
+              <Header />
+            </Move>
+          </Wrapper>
 
-          <Move className="grow py-8 sm:py-12">
+          <Move style={{ flexGrow: 1, paddingBlock: 'var(--space-8x)' }}>
             <main>{children}</main>
           </Move>
 
-          <Move>
-            <Footer />
-          </Move>
+          <Wrapper>
+            <Move>
+              <Footer />
+            </Move>
+          </Wrapper>
         </Providers>
       </body>
     </html>

@@ -9,7 +9,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -21,7 +21,6 @@
     ],
     "paths": {
       "#/*": ["./*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "baseUrl": "."
   },
@@ -30,7 +29,7 @@
     "**/*.ts", 
     "**/*.tsx", 
     ".next/types/**/*.ts",     
-    ".contentlayer/generated", "next.config.mjs",
+    "next.config.mjs", 
   ],
   "exclude": ["node_modules"]
 }

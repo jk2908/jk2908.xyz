@@ -7,7 +7,8 @@ export const ThemeContext = createContext<Theme>(undefined)
 const s = `!function(){var e=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=e}()`
 
 const Script = memo(function Script() {
-  return <script dangerouslySetInnerHTML={{ __html: s }} />
+    // biome-ignore lint/security/noDangerouslySetInnerHtml: stfu
+    return <script dangerouslySetInnerHTML={{ __html: s }} />
 })
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {

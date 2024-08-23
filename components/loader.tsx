@@ -1,20 +1,41 @@
-import { cn } from '#/lib/utils'
+import { clsx } from 'clsx'
+import { cxx, Style } from '@jk2908/cxx'
+
+const [styles, css] = cxx`
+	@keyframes pulse {
+		0%, 100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.3;
+		}
+	}
+
+	.loader > span {
+	  animation: pulse 1s infinite;
+    color: rgb(var(--neutral-500) / 100%);
+	}
+`
 
 export function Loader({
-  count = 3,
-  size = 'md',
-  className,
+	count = 3,
+	className,
+	...rest
 }: {
-  count?: number
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+	count?: number
 } & React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div className={cn('flex', className)}>
-      {Array.from({ length: count }, (_, idx) => (
-        <span key={idx} className="animate-pulse" style={{ animationDelay: `0.${idx * 2}s` }}>
-          .
-        </span>
-      ))}
-    </div>
-  )
+	return (
+		<div className={clsx(styles.loader, className)} {...rest}>
+			{Array.from({ length: count }, (_, idx) => (
+				// biome-ignore lint/suspicious/noArrayIndexKey: nah, it's fine here
+				<span key={idx} style={{ animationDelay: `0.${idx * 2}s` }}>
+					.
+				</span>
+			))}
+
+			<Style>
+				{css}
+			</Style>
+		</div>
+	)
 }

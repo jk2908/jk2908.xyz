@@ -14,7 +14,7 @@ function P({ children }: { children?: React.ReactNode }) {
 
 function H2({ children }: { children?: React.ReactNode }) {
   return (
-    <Heading className="mb-2 text-sm" level={2}>
+    <Heading level={2}>
       {children}
     </Heading>
   )
@@ -27,7 +27,7 @@ function A({
 }: {
   children?: React.ReactNode
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-  const c = 'body-link'
+  const c = 'link'
 
   if (href?.startsWith('/')) {
     return (
