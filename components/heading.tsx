@@ -12,7 +12,6 @@ const [styles, css, href] = cxx`
     color: rgb(var(--neutral-500) / 100%);
     font-size: var(--text-sm);
     font-weight: 400;
-    margin-block-end: var(--space);
   }
 `
 
