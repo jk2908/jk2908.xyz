@@ -1,9 +1,9 @@
 import { clsx } from 'clsx'
-import { cxx, Style } from '@jk2908/cxx'
+import { cxx } from '@jk2908/cxx'
 
 import { NowPlaying } from '#/components/now-playing'
 
-const [styles, css] = cxx`
+const [styles, css, href] = cxx`
   .footer {
     align-items: center;
     border-block-start: 1px solid rgb(var(--keyline));
@@ -29,9 +29,9 @@ export function Footer({ className, ...rest }: React.HTMLAttributes<HTMLElement>
 
 			<NowPlaying />
 
-			<Style>
+			<style href={href} precedence="medium">
         {css}
-      </Style>
+      </style>
 		</footer>
 	)
 }

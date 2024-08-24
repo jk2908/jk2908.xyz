@@ -1,7 +1,7 @@
 import { clsx } from 'clsx'
-import { cxx, Style } from '@jk2908/cxx'
+import { cxx } from '@jk2908/cxx'
 
-const [styles, css] = cxx`
+const [styles, css, href] = cxx`
   .wrapper {
     inline-size: 100%;
     margin-inline: auto;
@@ -19,9 +19,9 @@ export function Wrapper({
 		<div className={clsx(styles.wrapper, className)} {...rest}>
 			{children}
 
-      <Style>
+			<style href={href} precedence="medium">
         {css}
-      </Style>
+      </style>
 		</div>
 	)
 }

@@ -1,7 +1,7 @@
 import { clsx } from 'clsx'
-import { cxx, Style } from '@jk2908/cxx'
+import { cxx } from '@jk2908/cxx'
 
-const [styles, css] = cxx`
+const [styles, css, href] = cxx`
 	@keyframes pulse {
 		0%, 100% {
 			opacity: 1;
@@ -33,9 +33,9 @@ export function Loader({
 				</span>
 			))}
 
-			<Style>
-				{css}
-			</Style>
+			<style href={href} precedence="medium">
+        {css}
+      </style>
 		</div>
 	)
 }

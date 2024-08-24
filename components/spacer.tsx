@@ -1,7 +1,7 @@
 import { clsx } from 'clsx'
-import { cxx, Style } from '@jk2908/cxx'
+import { cxx } from '@jk2908/cxx'
 
-const [styles, css] = cxx`
+const [styles, css, href] = cxx`
   .spacer {
 
    + & {
@@ -23,9 +23,9 @@ export function Spacer({
     <div className={clsx(styles.spacer, className)} {...rest}>
       {children}
 
-      <Style>
+			<style href={href} precedence="medium">
         {css}
-      </Style>
+      </style>
     </div>
   )
 }

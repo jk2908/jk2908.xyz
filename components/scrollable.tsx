@@ -3,11 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { clsx } from 'clsx'
-import { cxx, Style } from '@jk2908/cxx'
+import { cxx } from '@jk2908/cxx'
 
 import { GradientMask } from '#/components/gradient-mask'
 
-const [styles, css] = cxx`
+const [styles, css, href] = cxx`
 	.scrollable {
 		overflow-x: auto;
 		position: relative;
@@ -124,9 +124,9 @@ export function Scrollable({
 
 			<GradientMask isVisible={isRightEdgeVisible} toMirrored />
 
-			<Style>
-				{css}
-			</Style>
+			<style href={href} precedence="medium">
+        {css}
+      </style>
 		</div>
 	)
 }

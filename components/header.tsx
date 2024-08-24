@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { URL } from '#/lib/config'
 
 import clsx from 'clsx'
-import { cxx, Style } from '@jk2908/cxx'
+import { cxx } from '@jk2908/cxx'
 
-const [styles, css] = cxx`
+const [styles, css, href] = cxx`
   .header {
     align-items: center;
     display: flex;
@@ -29,9 +29,9 @@ export function Header({ className, ...rest }: React.HTMLAttributes<HTMLElement>
     <header className={clsx(styles.header, className)} {...rest}>
       <Link href="/">{URL}</Link>
 
-      <Style>
+			<style href={href} precedence="medium">
         {css}
-      </Style>
+      </style>
     </header>
   )
 }

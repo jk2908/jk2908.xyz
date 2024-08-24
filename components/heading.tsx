@@ -1,5 +1,5 @@
 import { clsx } from 'clsx'
-import { cxx, Style } from '@jk2908/cxx'
+import { cxx } from '@jk2908/cxx'
 
 type Props = {
   children: React.ReactNode
@@ -7,7 +7,7 @@ type Props = {
   className?: string
 }
 
-const [styles, css] = cxx`
+const [styles, css, href] = cxx`
   .heading {
     color: rgb(var(--neutral-500) / 100%);
     font-size: var(--text-sm);
@@ -28,9 +28,9 @@ export function Heading({
     <Cmp className={clsx(styles.heading, className)} {...rest}>
       {children}
 
-      <Style>
+			<style href={href} precedence="medium">
         {css}
-      </Style>
+      </style>
     </Cmp>
   )
 }

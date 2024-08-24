@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { unstable_noStore as noStore } from 'next/cache'
 
 import { clsx } from 'clsx'
-import { cxx, Style } from '@jk2908/cxx'
+import { cxx } from '@jk2908/cxx'
 
 import type { NowPlaying as NowPlayingType, SpotifyResponse } from '#/lib/types'
 
@@ -69,7 +69,7 @@ async function Track() {
 	)
 }
 
-const [styles, css] = cxx`
+const [styles, css, href] = cxx`
 	.nowplaying {
 		align-items: center;
 		display: flex;
@@ -99,9 +99,9 @@ export async function NowPlaying({ className, ...rest }: React.HTMLAttributes<HT
 				</Suspense>
 			</Scrollable>
 
-			<Style>
-				{css}
-			</Style>
+			<style href={href} precedence="medium">
+        {css}
+      </style>
 		</div>
 	)
 }
