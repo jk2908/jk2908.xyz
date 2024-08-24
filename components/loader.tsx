@@ -11,9 +11,12 @@ const [styles, css, href] = cxx`
 		}
 	}
 
-	.loader > span {
-	  animation: pulse 1s infinite;
-    color: rgb(var(--neutral-500) / 100%);
+	.loader {
+
+		& > span {
+			animation: pulse 1s infinite;
+    	color: rgb(var(--neutral-500) / 100%);
+		}
 	}
 `
 
