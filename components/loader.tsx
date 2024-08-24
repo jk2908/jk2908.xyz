@@ -13,7 +13,7 @@ const [styles, css, href] = cxx`
 
 	.loader {
 
-		& > span {
+		> span {
 			animation: pulse 1s infinite;
     	color: rgb(var(--neutral-500) / 100%);
 		}
