@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@jk2908/cxx": "0.0.26",
+    "@jk2908/cxx": "0.0.27",
     "babel-plugin-react-compiler": "^0.0.0-experimental-696af53-20240625",
     "clsx": "^2.1.1",
     "nanoid": "^5.0.7",
