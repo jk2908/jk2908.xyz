@@ -3,10 +3,10 @@ import { Metadata } from 'next'
 
 import { ME } from '#/lib/config'
 
-import { Heading } from '#/components/heading'
-import { PostsList } from '#/components/posts-list'
-import { Spacer } from '#/components/spacer'
-import { Wrapper } from '#/components/wrapper'
+import { Heading } from '#/ui/heading'
+import { PostsList } from '#/ui/posts-list'
+import { Spacer } from '#/ui/spacer'
+import { Wrapper } from '#/ui/wrapper'
 
 export const metadata: Metadata = {
   title: `Home - ${ME}`,

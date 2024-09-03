@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 
-import { Heading } from '#/components/heading'
-import { Spacer } from '#/components/spacer'
+import { Heading } from '#/ui/heading'
+import { Spacer } from '#/ui/spacer'
 
 function P({ children }: { children?: React.ReactNode }) {
   return (

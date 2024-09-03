@@ -6,10 +6,10 @@ import { cxx } from '@jk2908/cxx'
 
 import type { NowPlaying as NowPlayingType, SpotifyResponse } from '#/lib/types'
 
-import { Glitch } from '#/components/glitch'
-import { Heading } from '#/components/heading'
-import { Loader } from '#/components/loader'
-import { Scrollable } from '#/components/scrollable'
+import { Glitch } from '#/ui/glitch'
+import { Heading } from '#/ui/heading'
+import { Loader } from '#/ui/loader'
+import { Scrollable } from '#/ui/scrollable'
 
 async function getToken() {
 	const res = await fetch('https://accounts.spotify.com/api/token', {

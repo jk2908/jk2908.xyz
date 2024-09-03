@@ -1,7 +1,7 @@
 import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
-import { NowPlaying } from '#/components/now-playing'
+import { NowPlaying } from '#/ui/now-playing'
 
 const [styles, css, href] = cxx`
   .footer {

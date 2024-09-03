@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 
 import { DESCRIPTION, ME } from '#/lib/config'
 
-import { Footer } from '#/components/footer'
-import { Header } from '#/components/header'
-import { Move } from '#/components/move'
-import { Providers } from '#/components/providers'
-import { Wrapper } from '#/components/wrapper'
+import { Footer } from '#/ui/footer'
+import { Header } from '#/ui/header'
+import { Move } from '#/ui/move'
+import { Providers } from '#/ui/providers'
+import { Wrapper } from '#/ui/wrapper'
 
 import '#/app/styles.css'
 

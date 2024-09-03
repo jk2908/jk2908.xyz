@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
-import { GradientMask } from '#/components/gradient-mask'
+import { GradientMask } from '#/ui/gradient-mask'
 
 const [styles, css, href] = cxx`
 	.scrollable {
