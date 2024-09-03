@@ -20,7 +20,7 @@
     "react-dom": "^19.0.0-rc-1d989965-20240821"
   },
   "devDependencies": {
-    "@jk2908/cxx": "0.0.32",
+    "@jk2908/cxx": "0.0.33",
     "@types/node": "20.8.9",
     "@types/react": "latest",
     "@types/react-dom": "latest",
