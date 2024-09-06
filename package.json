@@ -13,6 +13,7 @@
     "@biomejs/biome": "^1.8.3",
     "babel-plugin-react-compiler": "^0.0.0-experimental-696af53-20240625",
     "clsx": "^2.1.1",
+    "lightningcss": "^1.26.0",
     "nanoid": "^5.0.7",
     "next": "^15.0.0-canary.123",
     "next-mdx-remote": "^4.4.1",
@@ -20,7 +21,7 @@
     "react-dom": "^19.0.0-rc-1d989965-20240821"
   },
   "devDependencies": {
-    "@jk2908/cxx": "0.0.33",
+    "@jk2908/cxx": "0.1.0-canary.1",
     "@types/node": "20.8.9",
     "@types/react": "latest",
     "@types/react-dom": "latest",
