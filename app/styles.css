@@ -8,7 +8,9 @@
     --neutral-200: 229 229 229;
     --neutral-500: 115 115 115;
     --neutral-800: 38 38 38;
-    --neutral-950: 10 10 10;
+    --neutral-900: 25 25 25;
+    --neutral-925: 20 20 20;
+    --neutral-950: 15 15 15;
 
     --space-1\/2: calc(var(--space) / 2);
     --space: .25rem;
@@ -30,8 +32,8 @@
     --space-17x: calc(var(--space) * 17);
     --space-18x: calc(var(--space) * 18);
 
-    --app-bg: rgb(var(--neutral-50) / 100%);
-    --app-fg: rgb(var(--neutral-950) / 100%);
+    --app-bg: var(--neutral-50);
+    --app-fg: var(--neutral-950);
 
     --keyline: var(--neutral-200);
 
@@ -52,8 +54,8 @@
     --tracking-widest: .2em;
 
     &[data-theme=dark] {
-      --app-bg: rgb(var(--neutral-950) / 100%);
-      --app-fg: rgb(var(--neutral-50) / 100%);
+      --app-bg: var(--neutral-950);
+      --app-fg: var(--neutral-50);
 
       --keyline: var(--neutral-800);
     }
@@ -73,6 +75,8 @@
   }
 
   body {
+    background-color: rgb(var(--app-bg) / 100%);
+    color: rgb(var(--app-fg) / 100%);
     display: flex;
     flex-direction: column;
     font-family: var(--font-mono), monospace;
