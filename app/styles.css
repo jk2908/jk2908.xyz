@@ -4,6 +4,8 @@
   :root {
     --gr33n-100: 0 255 0;
     
+    --white: 255 255 255;
+    --neutral-25: 253 253 253;
     --neutral-50: 250 250 250;
     --neutral-200: 229 229 229;
     --neutral-500: 115 115 115;
@@ -32,7 +34,7 @@
     --space-17x: calc(var(--space) * 17);
     --space-18x: calc(var(--space) * 18);
 
-    --app-bg: var(--neutral-50);
+    --app-bg: var(--white);
     --app-fg: var(--neutral-950);
 
     --keyline: var(--neutral-200);
@@ -55,7 +57,7 @@
 
     &[data-theme=dark] {
       --app-bg: var(--neutral-950);
-      --app-fg: var(--neutral-50);
+      --app-fg: var(--white);
 
       --keyline: var(--neutral-800);
     }
