@@ -1,7 +1,7 @@
 import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
-const [styles, css, href] = cxx`
+const [css, styles, href] = cxx`
   .wrapper {
     inline-size: 100%;
     margin-inline: auto;

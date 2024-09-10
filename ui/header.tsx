@@ -5,7 +5,7 @@ import { URL } from '#/lib/config'
 import clsx from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
-const [styles, css, href] = cxx`
+const [css, styles, href] = cxx`
   .header {
     align-items: center;
     display: flex;

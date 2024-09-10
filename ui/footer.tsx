@@ -3,7 +3,7 @@ import { cxx } from '@jk2908/cxx'
 
 import { NowPlaying } from '#/ui/now-playing'
 
-const [styles, css, href] = cxx`
+const [css, styles, href] = cxx`
   .footer {
     align-items: center;
     border-block-start: 1px solid rgb(var(--keyline));

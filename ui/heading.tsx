@@ -7,7 +7,7 @@ type Props = {
   className?: string
 }
 
-const [styles, css, href] = cxx`
+const [css, styles, href] = cxx`
   .heading {
     color: rgb(var(--neutral-500) / 100%);
     font-size: var(--text-sm);

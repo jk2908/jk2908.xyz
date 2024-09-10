@@ -69,7 +69,7 @@ async function Track() {
 	)
 }
 
-const [styles, css, href] = cxx`
+const [css, styles, href] = cxx`
 	.nowplaying {
 		align-items: center;
 		display: flex;

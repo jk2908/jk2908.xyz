@@ -8,8 +8,8 @@ type Props = {
   className?: string
 } & React.HTMLAttributes<HTMLSpanElement>
 
-const [styles, css, href] = cxx`
-    @keyframes glitch {
+const [css, styles, href] = cxx`
+  @keyframes glitch {
     0% {
       clip-path: polygon(27% 56%, 66% 81%, 28% 70%, 97% 23%, 21% 44%, 64% 83%, 10% 82%, 88% 23%, 69% 8%, 39% 25%, 20% 88%, 91% 72%, 59% 20%, 48% 71%, 51% 73%, 97% 79%, 49% 30%, 7% 66%, 1% 82%, 15% 6%, 14% 32%, 98% 3%, 88% 46%, 58% 57%, 53% 29%, 57% 29%);
       color: rgb(var(--gr33n-100) / 1);

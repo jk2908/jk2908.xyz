@@ -11,16 +11,16 @@
   },
   "dependencies": {
     "@biomejs/biome": "^1.8.3",
-    "babel-plugin-react-compiler": "^0.0.0-experimental-696af53-20240625",
+    "babel-plugin-react-compiler": "^0.0.0-experimental-2bc6fec-20240909",
     "clsx": "^2.1.1",
     "nanoid": "^5.0.7",
-    "next": "^15.0.0-canary.123",
+    "next": "^15.0.0-canary.148",
     "next-mdx-remote": "^4.4.1",
-    "react": "^19.0.0-rc-1d989965-20240821",
-    "react-dom": "^19.0.0-rc-1d989965-20240821"
+    "react": "^19.0.0-rc-e210d081-20240909",
+    "react-dom": "^19.0.0-rc-e210d081-20240909"
   },
   "devDependencies": {
-    "@jk2908/cxx": "0.1.0-canary.1",
+    "@jk2908/cxx": "0.1.0-canary.2",
     "@types/node": "20.8.9",
     "@types/react": "latest",
     "@types/react-dom": "latest",

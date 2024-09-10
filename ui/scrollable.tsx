@@ -7,7 +7,7 @@ import { cxx } from '@jk2908/cxx'
 
 import { GradientMask } from '#/ui/gradient-mask'
 
-const [styles, css, href] = cxx`
+const [css, styles, href] = cxx`
 	.scrollable {
 		overflow-x: auto;
 		position: relative;
