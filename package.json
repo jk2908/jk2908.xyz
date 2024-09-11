@@ -20,7 +20,7 @@
     "react-dom": "^19.0.0-rc-e210d081-20240909"
   },
   "devDependencies": {
-    "@jk2908/cxx": "0.1.0-canary.2",
+    "@jk2908/cxx": "^0.1.1",
     "@types/node": "20.8.9",
     "@types/react": "latest",
     "@types/react-dom": "latest",
