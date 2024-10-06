@@ -2,9 +2,9 @@ import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
 type Props = {
-  children: React.ReactNode
-  colour: string
-  className?: string
+	children: React.ReactNode
+	colour: string
+	className?: string
 } & React.ComponentPropsWithRef<'span'>
 
 const [css, styles, href] = cxx`
@@ -65,13 +65,13 @@ const [css, styles, href] = cxx`
 `
 
 export function Glitch({ children, ref, colour, className, ...rest }: Props) {
-  return (
-    <span className={clsx(styles.glitch, className)} {...rest}>
-      {children}
+	return (
+		<span className={clsx(styles.glitch, className)} {...rest}>
+			{children}
 
 			<style href={href} precedence="medium">
-        {css}
-      </style>
-    </span>
-  )
+				{css}
+			</style>
+		</span>
+	)
 }

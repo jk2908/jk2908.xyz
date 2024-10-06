@@ -20,8 +20,8 @@ export function Wrapper({
 			{children}
 
 			<style href={href} precedence="medium">
-        {css}
-      </style>
+				{css}
+			</style>
 		</div>
 	)
 }
