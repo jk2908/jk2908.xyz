@@ -14,7 +14,7 @@ export function Wrapper({
 	children,
 	className,
 	...rest
-}: { children: React.ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
+}: { children: React.ReactNode } & React.ComponentPropsWithRef<'div'>) {
 	return (
 		<div className={clsx(styles.wrapper, className)} {...rest}>
 			{children}

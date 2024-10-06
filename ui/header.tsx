@@ -24,7 +24,7 @@ const [css, styles, href] = cxx`
   }
 `
 
-export function Header({ className, ...rest }: React.HTMLAttributes<HTMLElement>) {
+export function Header({ className, ...rest }: React.ComponentPropsWithRef<'header'>) {
   return (
     <header className={clsx(styles.header, className)} {...rest}>
       <Link href="/">{URL}</Link>

@@ -5,7 +5,7 @@ export function GradientMask({
 	toMirrored,
 	className,
 	...rest
-}: { isVisible?: boolean; toMirrored?: boolean } & React.HTMLAttributes<HTMLDivElement>) {
+}: { isVisible?: boolean; toMirrored?: boolean } & React.ComponentPropsWithRef<'div'>) {
 	return (
 		<div
 			className={clsx(className)}

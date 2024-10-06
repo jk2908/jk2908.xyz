@@ -20,7 +20,7 @@ const [css, styles, href] = cxx`
   }
 `
 
-export function Footer({ className, ...rest }: React.HTMLAttributes<HTMLElement>) {
+export function Footer({ className, ...rest }: React.ComponentPropsWithRef<'footer'>) {
 	const year = new Date().getFullYear()
 
 	return (
@@ -30,8 +30,8 @@ export function Footer({ className, ...rest }: React.HTMLAttributes<HTMLElement>
 			<NowPlaying />
 
 			<style href={href} precedence="medium">
-        {css}
-      </style>
+				{css}
+			</style>
 		</footer>
 	)
 }

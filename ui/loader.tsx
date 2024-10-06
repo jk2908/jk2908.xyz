@@ -26,7 +26,7 @@ export function Loader({
 	...rest
 }: {
 	count?: number
-} & React.HTMLAttributes<HTMLDivElement>) {
+} & React.ComponentPropsWithRef<'div'>) {
 	return (
 		<div className={clsx(styles.loader, className)} {...rest}>
 			{Array.from({ length: count }, (_, idx) => (
@@ -37,8 +37,8 @@ export function Loader({
 			))}
 
 			<style href={href} precedence="medium">
-        {css}
-      </style>
+				{css}
+			</style>
 		</div>
 	)
 }

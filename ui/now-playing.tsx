@@ -82,7 +82,7 @@ const [css, styles, href] = cxx`
 	}
 `
 
-export async function NowPlaying({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) {
+export async function NowPlaying({ className, ...rest }: React.ComponentPropsWithRef<'div'>) {
 	return (
 		<div className={clsx(styles.nowplaying, className)} {...rest}>
 			<Heading

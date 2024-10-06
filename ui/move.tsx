@@ -54,7 +54,7 @@ export function Move({
   children,
   style,
   ...rest
-}: { children: React.ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
+}: { children: React.ReactNode } & React.ComponentPropsWithRef<'div'>) {
   const [{ isMoving, translateX, translateY }, dispatch] = useReducer(reducer, initialState)
 
   const onPress = useCallback((e: React.PointerEvent) => {

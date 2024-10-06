@@ -18,7 +18,7 @@ export function Spacer({
   children,
   className,
   ...rest
-}: { children: React.ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
+}: { children: React.ReactNode } & React.ComponentPropsWithRef<'div'>) {
   return (
     <div className={clsx(styles.spacer, className)} {...rest}>
       {children}

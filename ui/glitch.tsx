@@ -4,9 +4,8 @@ import { cxx } from '@jk2908/cxx'
 type Props = {
   children: React.ReactNode
   colour: string
-  ref?: React.Ref<HTMLSpanElement>
   className?: string
-} & React.HTMLAttributes<HTMLSpanElement>
+} & React.ComponentPropsWithRef<'span'>
 
 const [css, styles, href] = cxx`
   @keyframes glitch {
@@ -67,7 +66,7 @@ const [css, styles, href] = cxx`
 
 export function Glitch({ children, ref, colour, className, ...rest }: Props) {
   return (
-    <span ref={ref} className={clsx(styles.glitch, className)} {...rest}>
+    <span className={clsx(styles.glitch, className)} {...rest}>
       {children}
 
 			<style href={href} precedence="medium">

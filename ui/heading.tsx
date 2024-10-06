@@ -2,9 +2,9 @@ import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
 type Props = {
-  children: React.ReactNode
-  level: 1 | 2 | 3 | 4 | 5 | 6
-  className?: string
+	children: React.ReactNode
+	level: 1 | 2 | 3 | 4 | 5 | 6
+	className?: string
 }
 
 const [css, styles, href] = cxx`
@@ -16,20 +16,20 @@ const [css, styles, href] = cxx`
 `
 
 export function Heading({
-  children,
-  className,
-  level,
-  ...rest
-}: Props & React.HTMLAttributes<HTMLHeadingElement>) {
-  const Cmp = `h${level}` as const
+	children,
+	className,
+	level,
+	...rest
+}: Props & React.ComponentPropsWithRef<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>) {
+	const Cmp = `h${level}` as const
 
-  return (
-    <Cmp className={clsx(styles.heading, className)} {...rest}>
-      {children}
+	return (
+		<Cmp className={clsx(styles.heading, className)} {...rest}>
+			{children}
 
 			<style href={href} precedence="medium">
-        {css}
-      </style>
-    </Cmp>
-  )
+				{css}
+			</style>
+		</Cmp>
+	)
 }

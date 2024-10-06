@@ -27,14 +27,14 @@ export function Scrollable({
 	mode = 'manual',
 	speed = 1500 / 60,
 	wait,
-  className,
+	className,
 	...rest
 }: {
 	children: React.ReactNode
 	mode?: 'auto' | 'manual'
 	speed?: number
 	wait?: number
-} & React.HTMLAttributes<HTMLDivElement>) {
+} & React.ComponentPropsWithRef<'div'>) {
 	const wrapperRef = useRef<HTMLDivElement>(null)
 	const scrollRef = useRef<HTMLDivElement>(null)
 	const resizeRef = useRef<ResizeObserver | null>(null)
@@ -125,8 +125,8 @@ export function Scrollable({
 			<GradientMask isVisible={isRightEdgeVisible} toMirrored />
 
 			<style href={href} precedence="medium">
-        {css}
-      </style>
+				{css}
+			</style>
 		</div>
 	)
 }
