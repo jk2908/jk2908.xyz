@@ -7,9 +7,7 @@ import { Mdx } from '#/ui/mdx'
 import { Spacer } from '#/ui/spacer'
 import { Wrapper } from '#/ui/wrapper'
 
-export const generateStaticParams = async () => {
-	return allPosts.map(({ slug }) => slug)
-}
+export const generateStaticParams = async () => allPosts.map(({ slug }) => slug)
 
 export async function generateMetadata({
 	params,
@@ -32,9 +30,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
 	return (
 		<Wrapper>
-			<Heading level={1}>
-				{title}
-			</Heading>
+			<Heading level={1}>{title}</Heading>
 
 			<Spacer>
 				<Mdx source={body} />

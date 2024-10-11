@@ -116,13 +116,13 @@ export function Scrollable({
 
 	return (
 		<div className={clsx(styles.scrollable, className)} ref={wrapperRef} {...rest}>
-			<GradientMask isVisible={isLeftEdgeVisible} />
+			<GradientMask isVisible={isLeftEdgeVisible} colour="rgb(var(--app-bg) / 100%)" />
 
 			<div ref={scrollRef} onScroll={onScroll} onMouseEnter={pause} onMouseLeave={play}>
 				{children}
 			</div>
 
-			<GradientMask isVisible={isRightEdgeVisible} toMirrored />
+			<GradientMask isVisible={isRightEdgeVisible} toMirrored colour="rgb(var(--app-bg) / 100%)" />
 
 			<style href={href} precedence="medium">
 				{css}
