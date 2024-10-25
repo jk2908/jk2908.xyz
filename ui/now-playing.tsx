@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import { unstable_noStore as noStore } from 'next/cache'
 
 import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
@@ -59,7 +58,6 @@ async function getNowPlaying(): Promise<NowPlayingType> {
 }
 
 async function Track() {
-	noStore()
 	const { track } = await getNowPlaying()
 
 	return (
@@ -82,7 +80,7 @@ const [css, styles, href] = cxx`
 	}
 `
 
-export async function NowPlaying({ className, ...rest }: React.ComponentPropsWithRef<'div'>) {
+export async function NowPlaying({ className, ...rest }: React.ComponentPropsWithRef<'div'>) {	
 	return (
 		<div className={clsx(styles.nowplaying, className)} {...rest}>
 			<Heading
