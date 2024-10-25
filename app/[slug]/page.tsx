@@ -12,33 +12,31 @@ export const generateStaticParams = async () => allPosts.map(({ slug }) => slug)
 export async function generateMetadata({
 	params,
 }: {
-	params: { slug: string }
+	params: Promise<{ slug: string }>
 }) {
-	const p = await onePost(params.slug)
-
+	const p = onePost((await params).slug)
+	
 	if (!p) return
 
 	return { title: p.title }
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-	const p = await onePost(params.slug)
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+	const p = onePost((await params).slug)
 
 	if (!p) redirect('/')
 
-	const { title, body, publishedAt } = p
-
 	return (
 		<Wrapper>
-			<Heading level={1}>{title}</Heading>
+			<Heading level={1}>{p.title}</Heading>
 
 			<Spacer>
-				<Mdx source={body} />
+				<Mdx source={p.body} />
 			</Spacer>
 
 			<Spacer>
-				<time dateTime={publishedAt} style={{ fontSize: 'var(--text-xs)' }}>
-					Published at {publishedAt}
+				<time dateTime={p.publishedAt} style={{ fontSize: 'var(--text-xs)' }}>
+					Published at {p.publishedAt}
 				</time>
 			</Spacer>
 		</Wrapper>
