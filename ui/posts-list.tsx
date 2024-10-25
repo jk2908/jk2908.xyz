@@ -9,9 +9,9 @@ export function PostsList(props: React.ComponentPropsWithRef<'ul'>) {
 
   return (
     <ul {...props}>
-      {posts.map(({ slug, title }) => (
-        <li key={slug}>
-          <Link href={`/${slug}`}>{title}</Link>
+      {posts.map(p => (
+        <li key={p.slug}>
+          <Link href={`/${p.slug}`}>{p.title}</Link>
         </li>
       ))}
     </ul>
