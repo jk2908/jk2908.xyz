@@ -14,10 +14,10 @@
     "babel-plugin-react-compiler": "^0.0.0-experimental-2bc6fec-20240909",
     "clsx": "^2.1.1",
     "nanoid": "^5.0.7",
-    "next": "^15.0.0-canary.148",
+    "next": "^15.0.0",
     "next-mdx-remote": "^4.4.1",
-    "react": "^19.0.0-rc-e210d081-20240909",
-    "react-dom": "^19.0.0-rc-e210d081-20240909"
+    "react": "^19.0.0-rc-69d4b800-20241021",
+    "react-dom": "^19.0.0-rc-69d4b800-20241021"
   },
   "devDependencies": {
     "@jk2908/cxx": "^0.1.1",
