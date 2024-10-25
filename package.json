@@ -20,14 +20,14 @@
     "react-dom": "^19.0.0-rc-69d4b800-20241021"
   },
   "devDependencies": {
-    "@jk2908/cxx": "^0.1.1",
+    "@jk2908/cxx": "^0.1.4",
     "@types/node": "20.8.9",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/webpack": "^5.28.5",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
-    "lightningcss": "^1.26.0",
+    "lightningcss": "^1.27.0",
     "postcss": "8.4.31",
     "typescript": "5.2.2"
   },
