@@ -1,5 +1,3 @@
-'use cache'
-
 import { redirect } from 'next/navigation'
 
 import { onePost, allPosts } from '#/lib/md'
