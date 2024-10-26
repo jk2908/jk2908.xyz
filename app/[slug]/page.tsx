@@ -1,24 +1,22 @@
 import { redirect } from 'next/navigation'
 
-import { allPosts, onePost } from '#/lib/md'
+import { onePost, allPosts } from '#/lib/md'
 
 import { Heading } from '#/ui/heading'
-import { Mdx } from '#/ui/mdx'
 import { Spacer } from '#/ui/spacer'
 import { Wrapper } from '#/ui/wrapper'
+import { Md } from '#/ui/md'
 
-export const generateStaticParams = async () => allPosts.map(({ slug }) => slug)
+export const generateStaticParams = async () => allPosts.map(({ slug }) => ({ slug }))
 
 export async function generateMetadata({
 	params,
 }: {
 	params: Promise<{ slug: string }>
 }) {
-	const p = onePost((await params).slug)
+	const { title } = onePost((await params).slug) ?? {}
 	
-	if (!p) return
-
-	return { title: p.title }
+	return !title ? { title: '?' } : { title }
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
@@ -31,7 +29,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 			<Heading level={1}>{p.title}</Heading>
 
 			<Spacer>
-				<Mdx source={p.body} />
+				<Md>{p.body}</Md>
 			</Spacer>
 
 			<Spacer>

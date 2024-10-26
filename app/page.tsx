@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: `Home - ${ME}`,
 }
 
-export default async function Page() {
+export default function Page() {
   return (
     <Wrapper>
       <Spacer>

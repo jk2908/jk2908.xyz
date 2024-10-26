@@ -5,6 +5,7 @@ const config = {
 	experimental: {
 		ppr: 'incremental',
 		reactCompiler: true,
+		dynamicIO: true
 	},
 	async redirects() {
 		return [

@@ -3,13 +3,8 @@ import { cxx } from '@jk2908/cxx'
 
 const [css, styles, href] = cxx`
   .spacer {
-
-   + & {
-      margin-block-start: var(--space-6x);
-      
-      @media (width >= 720px) {
-        margin-block-start: var(--space-8x);
-      }
+    + & {
+      margin-block-start: var(--spacer);
     }
   }
 `

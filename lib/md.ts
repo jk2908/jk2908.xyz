@@ -1,7 +1,7 @@
+import 'server-only'
+
 import fs from 'node:fs/promises'
 import path from 'node:path'
-
-import { cache } from 'react'
 
 import type { Post } from '#/lib/types'
 
@@ -34,7 +34,7 @@ const getMdx = async (dir: string) =>
 
 const readMdx = async (file: string) => parse(await fs.readFile(file, 'utf-8'))
 
-const create = cache(async (dir: string) => {
+async function create(dir: string) {  
 	try {
 		const files = await getMdx(dir)
 
@@ -69,7 +69,7 @@ const create = cache(async (dir: string) => {
 		console.error(err)
 		return []
 	}
-})
+}
 
 export const allPosts = await create(path.join(process.cwd(), 'posts'))
-export const onePost = (slug: string) => allPosts.find(p => p.slug === slug)
+export const onePost = (id: string) => allPosts.find(p => p.slug === id)

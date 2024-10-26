@@ -55,11 +55,18 @@
     --tracking-wider: .1em;
     --tracking-widest: .2em;
 
+    --spacer: var(--space-6x);
+    --spacer-sm: var(--space-4x);
+
     &[data-theme=dark] {
       --app-bg: var(--neutral-950);
       --app-fg: var(--white);
 
       --keyline: var(--neutral-800);
+    }
+
+    @media (width >= 720px) {
+      --spacer: var(--space-8x);
     }
   }
 

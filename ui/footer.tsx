@@ -1,3 +1,5 @@
+import { connection } from 'next/server'
+
 import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
@@ -20,13 +22,15 @@ const [css, styles, href] = cxx`
   }
 `
 
-export function Footer({ className, ...rest }: React.ComponentPropsWithRef<'footer'>) {
-	const year = new Date().getFullYear()
+async function Copyright() {
+  'use cache'
+  return <p>Copyright {new Date().getFullYear()}</p>
+}
 
+export function Footer({ className, ...rest }: React.ComponentPropsWithRef<'footer'>) {
 	return (
 		<footer className={clsx(styles.footer, className)} {...rest}>
-			<p>Copyright {year}</p>
-
+			<Copyright />
 			<NowPlaying />
 
 			<style href={href} precedence="medium">
