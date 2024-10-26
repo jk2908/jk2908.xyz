@@ -1,3 +1,5 @@
+'use cache'
+
 import { redirect } from 'next/navigation'
 
 import { onePost, allPosts } from '#/lib/md'
@@ -15,11 +17,11 @@ export async function generateMetadata({
 	params: Promise<{ slug: string }>
 }) {
 	const { title } = onePost((await params).slug) ?? {}
-	
+
 	return !title ? { title: '?' } : { title }
 }
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {	
 	const p = onePost((await params).slug)
 
 	if (!p) redirect('/')
