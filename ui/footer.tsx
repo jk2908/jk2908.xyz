@@ -1,5 +1,3 @@
-import { connection } from 'next/server'
-
 import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
