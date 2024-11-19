@@ -21,7 +21,7 @@ export default function Page() {
         </Heading>
 
         <p>
-          Jerome Kenway is a UI designer &amp; front-end engineer from London.
+          Jerome Kenway is a UI designer &amp; engineer from London.
           Checkout my code on{' '}
           <a className="link" href="https://www.github.com/jk2908">
             Github

@@ -4,14 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@biomejs/biome": "^1.8.3",
-    "babel-plugin-react-compiler": "^0.0.0-experimental-2bc6fec-20240909",
+    "babel-plugin-react-compiler": "^19.0.0-beta-8a03594-20241020",
     "clsx": "^2.1.1",
     "nanoid": "^5.0.7",
     "next": "^15.0.2-canary.6",
@@ -20,15 +20,12 @@
     "react-markdown": "^9.0.1"
   },
   "devDependencies": {
-    "@jk2908/cxx": "^0.1.4",
+    "@jk2908/cxx": "0.1.5-canary.5",
     "@types/node": "20.8.9",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/webpack": "^5.28.5",
-    "eslint": "8.52.0",
-    "eslint-config-next": "14.0.0",
     "lightningcss": "^1.27.0",
-    "postcss": "8.4.31",
     "typescript": "5.2.2"
   },
   "overrides": {

@@ -15,7 +15,7 @@ export async function generateMetadata({
 	params: Promise<{ slug: string }>
 }) {
 	const { title } = onePost((await params).slug) ?? {}
-
+	
 	return !title ? { title: '?' } : { title }
 }
 
