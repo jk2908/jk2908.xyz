@@ -5,14 +5,12 @@ import { NowPlaying } from '#/ui/now-playing'
 
 const [css, styles, href] = cxx`
   .footer {
-    align-items: center;
-    border-block-start: 1px solid rgb(var(--keyline));
     display: flex;
+    flex-direction: column;
     font-size: 14px;
     gap: var(--space-8x);
     justify-content: space-between;
     overflow: hidden;
-    padding-block: var(--space-4x);
 
     > p {
       flex-shrink: 0;
@@ -20,15 +18,9 @@ const [css, styles, href] = cxx`
   }
 `
 
-async function Copyright() {
-  'use cache'
-  return <p>Copyright {new Date().getFullYear()}</p>
-}
-
 export function Footer({ className, ...rest }: React.ComponentPropsWithRef<'footer'>) {
 	return (
 		<footer className={clsx(styles.footer, className)} {...rest}>
-			<Copyright />
 			<NowPlaying />
 
 			<style href={href} precedence="medium">

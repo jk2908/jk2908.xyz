@@ -41,7 +41,7 @@
 
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
-    --wrapper-max: 60ch;
+    --wrapper-max: 1024px;
     --wrapper-px: var(--space-5x);
 
     --text-xs: .75rem;

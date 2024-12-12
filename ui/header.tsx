@@ -12,11 +12,6 @@ const [css, styles, href] = cxx`
     flex-wrap: wrap;
     gap: var(--space-12x);
     justify-content: space-between;
-    padding-block: var(--space-8x);
-
-    @media (width >= 720px) {
-      padding-block: var(--space-12x);
-    }
 
     > a {
       font-size: var(--text-sm);
