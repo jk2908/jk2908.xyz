@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useReducer, useEffect } from 'react'
+import { useCallback, useReducer } from 'react'
 
 type State = {
 	isMoving: boolean
@@ -57,38 +57,25 @@ export function Move({
 }: { children: React.ReactNode } & React.ComponentPropsWithRef<'div'>) {
 	const [{ isMoving, translateX, translateY }, dispatch] = useReducer(reducer, initialState)
 
-	useEffect(() => {
-		if (!isMoving) return
-
-		function onMove(e: PointerEvent) {
-			dispatch({ type: 'MOVE', payload: { clientX: e.clientX, clientY: e.clientY } })
-		}
-
-		function onRelease() {
-			dispatch({ type: 'END_MOVE' })
-		}
-
-		let controller: AbortController | null = new AbortController()
-		const { signal } = controller
-
-		document.addEventListener('pointermove', onMove, { signal })
-		document.addEventListener('pointerup', onRelease, { signal })
-		document.addEventListener('pointercancel', onRelease, { signal })
-
-		return () => {
-			controller?.abort()
-			controller = null
-		}
-	}, [isMoving])
-
 	const onPress = useCallback((e: React.PointerEvent) => {
 		e.currentTarget.setPointerCapture(e.pointerId)
 		dispatch({ type: 'START_MOVE', payload: e })
 	}, [])
 
+	const onMove = useCallback((e: React.PointerEvent) => {
+		dispatch({ type: 'MOVE', payload: e })
+	}, [])
+
+	const onRelease = useCallback(() => {
+		dispatch({ type: 'END_MOVE' })
+	}, [])
+
 	return (
 		<div
 			onPointerDown={onPress}
+			onPointerMove={onMove}
+			onPointerUp={onRelease}
+			onPointerCancel={onRelease}
 			style={{
 				cursor: isMoving ? 'grabbing' : 'move',
 				transform: `translate(${translateX}px, ${translateY}px)`,
