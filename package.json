@@ -14,16 +14,16 @@
     "babel-plugin-react-compiler": "^19.0.0-beta-8a03594-20241020",
     "clsx": "^2.1.1",
     "nanoid": "^5.0.7",
-    "next": "^15.0.2-canary.6",
+    "next": "^15.2.0-canary.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^9.0.1"
   },
   "devDependencies": {
-    "@jk2908/cxx": "^0.1.5",
+    "@jk2908/cxx": "0.1.6",
     "@types/node": "20.8.9",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/react": "^19.0.4",
+    "@types/react-dom": "^19.0.2",
     "@types/webpack": "^5.28.5",
     "lightningcss": "^1.27.0",
     "typescript": "5.2.2"

@@ -58,7 +58,9 @@ export function Move({
 	const [{ isMoving, translateX, translateY }, dispatch] = useReducer(reducer, initialState)
 
 	const onPress = useCallback((e: React.PointerEvent) => {
-		e.currentTarget.setPointerCapture(e.pointerId)
+		;['BUTTON', 'A'].every(t => t !== (e.target as HTMLElement).tagName) &&
+			e.currentTarget.setPointerCapture(e.pointerId)
+
 		dispatch({ type: 'START_MOVE', payload: e })
 	}, [])
 
@@ -84,8 +86,7 @@ export function Move({
 				zIndex: isMoving ? 51 : 0,
 				...style,
 			}}
-			{...rest}
-		>
+			{...rest}>
 			{children}
 		</div>
 	)

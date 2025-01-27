@@ -1,4 +1,4 @@
-export type SpotifyResponse = {
+export type SpotifyRes = {
   is_playing: boolean
   progress_ms: number
   item: {
@@ -19,7 +19,7 @@ export type SpotifyResponse = {
   currently_playing_type: string
 }
 
-export type NowPlaying = {
+export type Playing = {
   track: {
     name: string
     artist: string
@@ -33,6 +33,7 @@ export type Post = {
   title: string
   slug: string
   publishedAt: string
+  ts: number
   updatedAt?: string
   isPrivate?: boolean
   isDraft?: boolean

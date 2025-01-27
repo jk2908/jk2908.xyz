@@ -1,48 +1,38 @@
-import { createContext, memo, useEffect, useState } from 'react'
+import { createContext, memo, useEffect, useState, useCallback } from 'react'
 
-import type { Theme } from '#/lib/types'
+export type Theme = 'default' | 'green'
 
-export const ThemeContext = createContext<Theme>(undefined)
-
-const s = `!function(){var e=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=e}()`
-
-const Script = memo(function Script() {
-    // biome-ignore lint/security/noDangerouslySetInnerHtml: stfu
-    return <script dangerouslySetInnerHTML={{ __html: s }} />
+export const ThemeContext = createContext({
+	theme: 'light',
+	setTheme: (t: Theme) => {},
 })
 
+const s =
+	'!function(){var e=localStorage.theme??(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=e}()'
+
+export const Script = memo(() => (
+	// biome-ignore lint/security/noDangerouslySetInnerHtml: shh
+	<script dangerouslySetInnerHTML={{ __html: s }} />
+))
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>()
+	const [theme, setTheme] = useState<Theme>('default')
 
-  useEffect(() => {
-    const t = document.documentElement.dataset.theme as Theme
+	useEffect(() => {
+		setTheme(document.documentElement.dataset.theme as Theme)
+	}, [])
 
-    if (!theme) {
-      setTheme(t)
-      return
-    }
+	const handler = useCallback((t: Theme) => {
+		setTheme(t)
+		localStorage.theme = t
+		document.documentElement.dataset.theme = t
+	}, [])
 
-    document.documentElement.dataset.theme = theme
-  }, [theme])
+	return (
+		<ThemeContext value={{ theme, setTheme: handler }}>
+			<Script />
 
-  useEffect(() => {
-    const mq = matchMedia('(prefers-color-scheme: dark)')
-
-    const handler = ({ matches }: MediaQueryListEvent) => {
-      setTheme(matches ? 'dark' : 'light')
-    }
-
-    mq.addEventListener('change', handler)
-
-    return () => {
-      mq.removeEventListener('change', handler)
-    }
-  }, [])
-
-  return (
-    <ThemeContext.Provider value={theme}>
-      <Script />
-      {children}
-    </ThemeContext.Provider>
-  )
+			{children}
+		</ThemeContext>
+	)
 }

@@ -1,11 +1,9 @@
-import 'server-only'
-
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import type { Post } from '#/lib/types'
 
-type Metadata = Omit<Post, 'slug' | 'body' | 'isPrivate' | 'isDraft'> & {
+type Metadata = Omit<Post, 'slug' | 'ts' | 'body' | 'isPrivate' | 'isDraft'> & {
 	isPrivate?: string
 	isDraft?: string
 }
@@ -29,14 +27,9 @@ function parse(content: string) {
 	return { metadata, body }
 }
 
-const getMdx = async (dir: string) =>
-	(await fs.readdir(dir)).filter(file => path.extname(file) === '.md')
-
-const readMdx = async (file: string) => parse(await fs.readFile(file, 'utf-8'))
-
-async function create(dir: string) {  
+async function create(dir: string) {
 	try {
-		const files = await getMdx(dir)
+		const files = (await fs.readdir(dir)).filter(file => path.extname(file) === '.md')
 
 		if (!files.length) {
 			console.warn(`No posts found in ${dir}`)
@@ -45,8 +38,8 @@ async function create(dir: string) {
 
 		const posts = await Promise.all(
 			files.map(async f => {
-				const { metadata, body } = await readMdx(path.join(dir, f))
-				const { title, publishedAt, updatedAt, isPrivate, isDraft } = metadata
+				const { metadata, body } = parse(await fs.readFile(path.join(dir, f), 'utf-8'))
+				const { title, publishedAt, isPrivate, isDraft, ...rest } = metadata
 				const slug = path.basename(f, path.extname(f))
 
 				if (!title) throw new Error('Post must have a title')
@@ -56,10 +49,11 @@ async function create(dir: string) {
 					slug,
 					title,
 					publishedAt,
-					updatedAt,
+					ts: new Date(publishedAt).getTime(),
 					isPrivate: isPrivate === 'true',
 					isDraft: isDraft === 'true',
 					body,
+					...rest,
 				} satisfies Post
 			}),
 		)

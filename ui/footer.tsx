@@ -1,7 +1,7 @@
 import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
-import { NowPlaying } from '#/ui/now-playing'
+import { Playing } from '#/ui/playing'
 
 const [css, styles, href] = cxx`
   .footer {
@@ -21,7 +21,7 @@ const [css, styles, href] = cxx`
 export function Footer({ className, ...rest }: React.ComponentPropsWithRef<'footer'>) {
 	return (
 		<footer className={clsx(styles.footer, className)} {...rest}>
-			<NowPlaying />
+			<Playing />
 
 			<style href={href} precedence="medium">
 				{css}

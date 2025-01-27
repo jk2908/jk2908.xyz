@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
-import type { NowPlaying as NowPlayingType, SpotifyResponse } from '#/lib/types'
+import type { Playing as TPlaying, SpotifyRes } from '#/lib/types'
 
 import { Glitch } from '#/ui/glitch'
 import { Heading } from '#/ui/heading'
@@ -26,9 +26,9 @@ async function getToken() {
 	return res.json()
 }
 
-const offAir = { track: null } satisfies NowPlayingType
+const offAir = { track: null } satisfies TPlaying
 
-async function getNowPlaying(): Promise<NowPlayingType> {
+async function getPlaying(): Promise<TPlaying> {
 	try {
 		const { access_token } = await getToken()
 		if (!access_token) return offAir
@@ -40,10 +40,12 @@ async function getNowPlaying(): Promise<NowPlayingType> {
 			},
 		})
 
-		if (!res.ok || res.status === 204) return offAir
-		const { item } = (await res.json()) as SpotifyResponse
+		if (!res.ok) return offAir
+
+		const { item }: SpotifyRes = await res.json()
 
 		if (!item) return offAir
+
 		const { name, artists } = item
 
 		return {
@@ -58,7 +60,7 @@ async function getNowPlaying(): Promise<NowPlayingType> {
 }
 
 async function Track() {
-	const { track } = await getNowPlaying()
+	const { track } = await getPlaying()
 
 	return (
 		<Glitch colour="rgb(var(--gr33n-100) / 1)">
@@ -68,7 +70,7 @@ async function Track() {
 }
 
 const [css, styles, href] = cxx`
-	.nowplaying {
+	.playing {
 		align-items: center;
 		display: flex;
 		gap: var(--space-2x);
@@ -80,14 +82,13 @@ const [css, styles, href] = cxx`
 	}
 `
 
-export async function NowPlaying({ className, ...rest }: React.ComponentPropsWithRef<'div'>) {	
+export async function Playing({ className, ...rest }: React.ComponentPropsWithRef<'div'>) {
 	return (
-		<div className={clsx(styles.nowplaying, className)} {...rest}>
+		<div className={clsx(styles.playing, className)} {...rest}>
 			<Heading
 				level={3}
 				aria-label="Currently playing on Spotify"
-				style={{ color: 'rgb(var(--gr33n-100) / 1)', marginBlockEnd: '0px' }}
-			>
+				style={{ color: 'rgb(var(--gr33n-100) / 1)', marginBlockEnd: '0px' }}>
 				s
 			</Heading>
 
@@ -98,8 +99,8 @@ export async function NowPlaying({ className, ...rest }: React.ComponentPropsWit
 			</Scrollable>
 
 			<style href={href} precedence="medium">
-        {css}
-      </style>
+				{css}
+			</style>
 		</div>
 	)
 }
