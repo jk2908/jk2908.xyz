@@ -9,7 +9,7 @@ type Config = {
 	when: boolean
 	repeat: boolean
 	on: 'keydown' | 'keyup'
-	ignore: Key[]
+	ignore: readonly Key[]
 	casing: 'relaxed' | 'strict'
 	mods: 'relaxed' | 'strict'
 }
@@ -40,7 +40,7 @@ const DEFAULT_CONFIG: Config = {
 	ignore: [],
 	casing: 'relaxed',
 	mods: 'relaxed',
-} as const
+} satisfies Config
 
 function parse(combo: Combo) {
 	return combo
