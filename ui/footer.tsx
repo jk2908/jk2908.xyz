@@ -1,12 +1,9 @@
 import { clsx } from 'clsx'
 import { cxx } from '@jk2908/cxx'
 
-import { Playing } from '#/ui/playing'
-
 const [css, styles, href] = cxx`
   .footer {
     display: flex;
-    flex-direction: column;
     font-size: 14px;
     gap: var(--space-8x);
     justify-content: space-between;
@@ -18,10 +15,10 @@ const [css, styles, href] = cxx`
   }
 `
 
-export function Footer({ className, ...rest }: React.ComponentPropsWithRef<'footer'>) {
+export function Footer({ children, className, ...rest }: React.ComponentPropsWithRef<'footer'>) {
 	return (
 		<footer className={clsx(styles.footer, className)} {...rest}>
-			<Playing />
+			{children}
 
 			<style href={href} precedence="medium">
 				{css}

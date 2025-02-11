@@ -63,7 +63,7 @@ async function Track() {
 	const { track } = await getPlaying()
 
 	return (
-		<Glitch colour="rgb(var(--gr33n-100) / 1)">
+		<Glitch colour="rgb(var(--gr33n) / 1)">
 			{track ? `${track.name} by ${track.artist}` : 'Off air'}
 		</Glitch>
 	)
@@ -77,7 +77,7 @@ const [css, styles, href] = cxx`
 		overflow: hidden;
 
 		> h3 {
-			color: rgb(var(--gr33n-100) / 100%);
+			color: rgb(var(--gr33n) / 100%);
 		}
 	}
 `
@@ -88,7 +88,7 @@ export async function Playing({ className, ...rest }: React.ComponentPropsWithRe
 			<Heading
 				level={3}
 				aria-label="Currently playing on Spotify"
-				style={{ color: 'rgb(var(--gr33n-100) / 1)', marginBlockEnd: '0px' }}>
+				style={{ color: 'rgb(var(--gr33n) / 1)', marginBlockEnd: '0px' }}>
 				s
 			</Heading>
 

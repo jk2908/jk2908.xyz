@@ -9,9 +9,10 @@ type Props = {
 
 const [css, styles, href] = cxx`
   .heading {
-    color: rgb(var(--neutral-500) / 100%);
+    color: rgb(var(--heading) / 100%);
     font-size: var(--text-sm);
     font-weight: 400;
+		text-transform: lowercase;
   }
 `
 

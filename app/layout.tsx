@@ -9,6 +9,8 @@ import { Header } from '#/ui/header'
 import { Move } from '#/ui/move'
 import { Providers } from '#/ui/providers'
 import { Wrapper } from '#/ui/wrapper'
+import { Cmdk, Shortcut } from '#/ui/cmd-k'
+import { Playing } from '#/ui/playing'
 
 import '#/app/styles.css'
 
@@ -69,6 +71,10 @@ const [css, , href] = cxx`
 		flex-wrap: wrap;
 		gap: var(--wrapper-px);
 		padding-block: var(--wrapper-px);
+
+		@media (width >= 1024px) {
+			padding-block-start: calc(var(--wrapper-px) * 2);
+		}
   }
 
 	:global(.h) {
@@ -84,7 +90,6 @@ const [css, , href] = cxx`
 	:global(.f) {
 		background-color: rgb(var(--app-bg) / 100%);
 		display: flex;
-		inline-size: 175px;
 		inset-block-end: var(--wrapper-px);
 		inset-inline-end: var(--wrapper-px);
 		justify-content: flex-end;
@@ -108,9 +113,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 							</Move>
 
 							<Move className="f">
-								<Footer />
+								<Footer>
+									<Playing />
+									<Shortcut />
+								</Footer>
 							</Move>
 						</Wrapper>
+
+						<Cmdk />
 					</Providers>
 				</body>
 			</html>

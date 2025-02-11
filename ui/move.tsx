@@ -58,7 +58,7 @@ export function Move({
 	const [{ isMoving, translateX, translateY }, dispatch] = useReducer(reducer, initialState)
 
 	const onPress = useCallback((e: React.PointerEvent) => {
-		;['BUTTON', 'A'].every(t => t !== (e.target as HTMLElement).tagName) &&
+		;['BUTTON', 'A', 'LABEL'].every(t => t !== (e.target as HTMLElement).tagName) &&
 			e.currentTarget.setPointerCapture(e.pointerId)
 
 		dispatch({ type: 'START_MOVE', payload: e })
